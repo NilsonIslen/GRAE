@@ -1,0 +1,15 @@
+<?php
+$id_us=$result->id_us;
+$name_us=$result->name_us;
+$email_us=$result->email_us;
+$tel_us=$result->tel_us;
+$key_us=$result->key_us;
+$profile=$result->profile;
+$customer=$result->customer;
+$OAM400g5=$result->AM400g5;
+$OAM550g5=$result->AM550g5;
+$OAM700g10=$result->AM700g10;
+$OAM800g20=$result->AM800g20;
+$o_masax1k=$result->masax1k;
+$RutaV=$result->Ruta;
+?>

@@ -1,0 +1,12 @@
+<?php
+$IdDel=$result->IdDel;
+$FechaD=$result->FechaD;
+$HoraD=$result->HoraD;
+$Responsable=$result->Responsable;
+$Vendedor=$result->Vendedor;
+$AM400g5=$result->AM400g5;
+$AM550g5=$result->AM550g5;
+$AM700g10=$result->AM700g10;
+$AM800g20=$result->AM800g20;
+$masax1k=$result->masax1k;
+?>
