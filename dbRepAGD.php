@@ -16,6 +16,11 @@ catch (PDOException $e)
 exit("Error: " . $e->getMessage());
 }
 
+$sql_products= "SELECT * FROM products"; 
+$query_products = $connect -> prepare($sql_products); 
+$query_products -> execute(); 
+$results_products = $query_products -> fetchAll(PDO::FETCH_OBJ);
+
 $sqlUsers= "SELECT * FROM users"; 
 $queryUsers = $connect -> prepare($sqlUsers); 
 $queryUsers -> execute(); 

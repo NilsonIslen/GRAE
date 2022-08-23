@@ -6,6 +6,37 @@ $ClaveS = $_SESSION['clave'];
 $id_us_s = $_SESSION['id_us'];
 $Fecha = date('d-m-Y');
 include "../dbRepAGD.php";
+
+if(isset($_POST['new_product'])){
+    $ref = $_POST['ref'];
+    $description = $_POST['description'];
+    $peso = $_POST['peso'];
+    $price = $_POST['price'];
+    $sql="insert into products(referencia,descripcion,peso_gramos,price)
+    values(:referencia,:descripcion,:peso_gramos,:price)";
+    $sql=$connect->prepare($sql);
+    $sql->bindParam(':referencia',$ref,PDO::PARAM_STR, 25);
+    $sql->bindParam(':descripcion',$description,PDO::PARAM_STR,25);
+    $sql->bindParam(':peso_gramos',$peso,PDO::PARAM_STR,25);
+    $sql->bindParam(':price',$price,PDO::PARAM_STR,25);
+    $sql->execute();
+    $lastInsertId=$connect->lastInsertId();
+echo "<div>";
+echo "<p> Se acaba de registrar nuevo producto</p>";
+echo "<a href='../index2.php'> Aceptar </a>";
+echo "</div>";
+}
+    
+
+
+
+
+
+
+
+
+
+
 if(isset($_POST['HDespachos'])){
     $FechaHD = $_POST['Fecha'];
     $Resp= $_POST['Responsable'];

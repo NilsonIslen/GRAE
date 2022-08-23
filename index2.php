@@ -46,7 +46,7 @@ $fecha_actual=strtotime("$Fecha");
                 echo "</tr>";
                 echo "</table>";
                     if($profile=='admin'){
-                        admin($opens_list,$new_client,$list_clients,$list_delivery_men,$dispatch_history,$sales_history,$close_session,$closes_list);
+                        admin($opens_list,$new_product,$new_client,$list_clients,$list_delivery_men,$dispatch_history,$sales_history,$close_session,$closes_list);
                         }
                     if($profile=='rep'){
                 echo "<form action='php/position.php' method='POST'>";

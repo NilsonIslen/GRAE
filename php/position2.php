@@ -15,6 +15,7 @@ if($longitud==''){$longitud=0;}
     fputs($fp, "?> \n");
     fclose($fp);
     echo "<div>";
+    echo "<p> Latitud: $latitud , Longitud: $longitud</p>";
     echo "<a href='secciones.php?seccion=guardar_ubicacion&id_c=$id_c'> Guardar ubicacion </a>";
     echo "</div>";
     echo "<div>";

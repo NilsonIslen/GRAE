@@ -8,6 +8,10 @@ include "../dbRepAGD.php";
 if(isset($_GET['seccion'])){
     $seccion=$_GET['seccion'];
 
+if($seccion == 'new_product'){
+    require "../html/form_new_product.html";
+}
+    
 
 if($seccion == 'nuevoCliente'){
     require "../html/form_city.html";
