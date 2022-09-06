@@ -15,11 +15,27 @@ if($seccion == 'new_product'){
 
 if($seccion == 'nuevoCliente'){
     require "../html/form_city.html";
-}
+    }
 
 if($seccion == "nuevoUsuario"){
     include "../Forms/nuevoUsuario.php";
     exit();
+}
+
+if($seccion == "cancel_sale"){
+    $id_cli=$_GET['id_cli'];
+    $files = glob("../Temp/$id_us_s/$id_cli/*"); 
+    foreach($files as $file){
+    if(is_file($file))
+    unlink($file);
+    }
+    $folder = "../Temp/$id_us_s/$id_cli";
+    if (file_exists($folder)) {
+        rmdir($folder);
+    }  
+    echo "<div>";
+    echo "<p> Acabas de cancelar la venta con el cliente id:$id_cli </p>";
+    echo "</div>";
 }
 
 if($seccion == "record_visit"){
@@ -49,51 +65,28 @@ if($seccion=='listar_clientes'){
     require "../html/form_rutas.html";
 }
 
+if($seccion == 'despacho'){
+    $id_rep=$_GET['rep'];
+    include "../Forms/despacho.php";
+}
+
     if($seccion == 'listarRepartidores'){
         echo "<a href='../index2.php'> Regresar </a>";
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> AM400g5 </td> <td> AM550g5 </td> <td> AM700g10 </td> <td> AM800g20 </td><td> Masax1k </td><td> Ruta </td>";
+        echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> Ruta </td>";
         echo "</tr>";
     if($queryUsers -> rowCount() > 0){
     foreach($resultsUsers as $result) {
     include "../Class/user.php";
     echo "<tr align='center'>";
-                echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='secciones.php?usuario=$id_us&seccion=despacho'> $OAM400g5 </a> </td> <td> <a href='secciones.php?usuario=$id_us&seccion=despacho'> $OAM550g5 </a> </td> <td> <a href='secciones.php?usuario=$id_us&seccion=despacho'> $OAM700g10 </a> </td> <td> <a href='secciones.php?usuario=$id_us&seccion=despacho'> $OAM800g20 </a> </td> <td> <a href='secciones.php?usuario=$id_us&seccion=despacho'> $o_masax1k </a> </td><td> <a href='secciones.php?usuario=$id_us&seccion=despacho'> $RutaV </a> </td>";
+                echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='secciones.php?rep=$id_us&seccion=despacho'> $RutaV </a> </td>";
     echo "</tr>";
 }}
             echo "</table>";
             echo "<a href='../index2.php'> Regresar </a>";
             exit();
         }
-
-
-        if($seccion=='HDespachos'){
-             echo "<div>";
-             echo "<a href='../index2.php'> Regresar </a>";
-             echo "<form action='posts.php' method='POST'>";
-             echo "<p> Historial de despachos :</p>";
-             echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
-             echo "<input type='hidden' name='clave' Value='$ClaveS'>";
-             echo "<p> <input type='Text' name='Fecha' placeholder='Fecha (DD-MM-AAAA)'> </p>";
-             echo "<p> <input type='Text' name='Responsable' placeholder='Responsable'> </p>";
-             echo "<p> <input type='Text' name='Vendedor' placeholder='Vendedor'> </p>";
-             echo "<p><button type='submit' name='HDespachos'> Consultar Historial </button> </p>";
-             echo "</form>";
-             echo "<a href='../index2.php'> Regresar </a>";
-                echo "</div>";
-                exit();
-            }
-
-            if($seccion == 'despacho'){
-                $id_rep=$_GET['usuario'];
-                echo "<Div>";
-                echo "<h2> Despachar repartidor id: $id_rep </h2>";
-                include "../Forms/despacho.php";
-                echo "<a href='secciones.php?seccion=listarRepartidores'> Regresar </a>";
-                echo "</Div>";
-                exit();
-            }
 
             if($seccion=='Pedidos'){
                 $IdCli=$_GET['client'];

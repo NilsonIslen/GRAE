@@ -20,44 +20,24 @@
                     if(($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $RutaV==$RutaC && $per_lat<0.0005 && $per_lat>-0.0005 && $per_long<0.0005 && $per_long>-0.0005 && $per_lat<>0 && $per_long<>0)
                     or($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $RutaV==$RutaC && $profile=="admin")){
                     $cola2_b2=$cola2++;
-                    if($OAM400g5>0 or $OAM550g5>0 or $OAM700g10>0 or $OAM800g20>0 or $o_masax1k>0){
-                    if($cola2==1){echo "<div> <b> $Barrio </b>";};
-
-                    if($IdVendedor==$id_us_s){  
-                echo "<p> <hr> </p>";
-                if($profile=='admin'){
-                echo "<form action='php/position2.php' method='POST'>";
-                echo "<input type='hidden' name='user' value='$UsuarioS'>"; 
-                echo "<input type='hidden' name='client' value='$IdCli'>"; 
-                echo "<input class='latitud' type='hidden' name='latitud' value=''>";
-                echo "<input class='longitud' type='hidden' name='longitud' value=''>";
-                echo "<button type='submit' name='upload_position2'> Actualizar ubicacion en $NameCli</button>";
-                echo "</form>";
-                }
-                        echo "<p class='p_br'> $NameCli </p>";
-                        echo "<p class='p_br'> $Direccion </p>";
+                    // if($cola2==1){echo "<b> $Barrio </b>";};
+                     if($IdVendedor==0){  
+                        echo "<div>";
+                        echo "<p class='p_br'> $NameCli ($Direccion $Barrio)</p>";
+                        //if($profile=='rep'){
+                        echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&seccion=sale'> Registrar visita </a>";
+                        //}
                         echo "<a href='tel:$TelCli'> Llamar </a> </p>";
-                        include "Forms/regVenta.php";
-                        echo "<a href='php/secciones.php?seccion=cancelar_visita&client=$IdCli'> Cancelar </a>";
-                        exit();
-                    }
-                    if($IdVendedor==0){   
-                    echo "<p> <a href='php/secciones.php?seccion=record_visit&client=$IdCli'> $NameCli </a> </p>";
-                    }
+                        echo "<a href='https://www.google.com/maps/@$latitud_c,$longitud_c,20z'> Maps </a> </p>";
+                        if($profile=='admin'){
+                        echo "<a href='php/position2.php?user=$UsuarioS&client=$IdCli'> Actualizar ubicacion </a>";
+                        }
+                        echo "</div>";
+                     }
                     if($IdVendedor<>0 && $IdVendedor<>$id_us_s){
                     echo "<p class='p_green'>  $IdVendedor -> $NameCli </p>";
-                    }}}}
                     echo "</div>";
-
-                    if($OAM400g5<=0 && $OAM550g5<=0 && $OAM700g10<=0 && $OAM800g20<=0 && $o_masax1k<=0){
-                        echo "<div>";
-                        echo "<p> Para ver los clientes que actualmente estan esparando visita </p>";
-                        echo "<p> debes contar con producto disponible.</p>";
-                        echo "<p> lo puedes adquirir en la direccion:</p>";
-                        echo "<p> Carrera 30a # 50a 65 Barrio Eucaliptus (Manizales - Caldas)</p>";
-                        echo "<p> movil de contacto: 3008188284";
-                        echo "<p> Para contar con el apoyo del equipo ingresa a nuestro grupo de whatsapp a travez de la siguiente imagen:</p>";
-                        echo "<p><a href='https://chat.whatsapp.com/FOrZ9xwootL56cCiYCzU3b'><img src='Imgs/banner_GROUP_whatsapp.png' width='250' height='90'></a></p>";
-                        echo "</div>";
-                        }}}
+                    }}}
+                    
+                    }}
 ?>

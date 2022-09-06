@@ -30,11 +30,6 @@ $sqlClients = "SELECT * FROM clients";
 $queryClients = $connect -> prepare($sqlClients); 
 $queryClients -> execute(); 
 $resultsClients = $queryClients -> fetchAll(PDO::FETCH_OBJ);
-
-$sqlDel= "SELECT * FROM deliveries2022"; 
-$queryDel = $connect -> prepare($sqlDel); 
-$queryDel -> execute(); 
-$resultsDel = $queryDel -> fetchAll(PDO::FETCH_OBJ); 
             
 $sqlVent = "SELECT * FROM ventas2022"; 
 $queryVent = $connect -> prepare($sqlVent); 

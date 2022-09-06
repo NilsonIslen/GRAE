@@ -13,13 +13,8 @@ if(isset($_POST['nuevoCliente'])){
     $NColor=$_POST['Color'];
     $NumAl=$_POST['NumAl'];
     $NFrecuencia=1;
-    $NVisita="date('d-m-Y');";
+    $NVisita=date('d-m-Y');;
     $Nhour=date('H:i');
-    $NDAM400g5=0;
-    $NDAM550g5=0;
-    $NDAM700g10=0;
-    $NDAM800g20=0;
-    $n_d_masax1k=0;
     $NIdVendedor=0;
     $NPedido='0';
     $Ruta=$_POST['Ruta'];;
@@ -40,7 +35,7 @@ if(isset($_POST['nuevoCliente'])){
 
 if($NColor==$NumAl){
 
-$sql="insert into clients(NameCli,Barrio,Direccion,latitud,longitud,TelCli,Frecuencia,Visita,hour,AM400g5,AM550g5,AM700g10,AM800g20,masax1k,IdVendedor,Pedido,Ruta) values(:NameCli,:Barrio,:Direccion,:latitud,:longitud,:TelCli,:Frecuencia,:Visita,:hour,:AM400g5,:AM550g5,:AM700g10,:AM800g20,:masax1k,:IdVendedor,:Pedido,:Ruta)";
+$sql="insert into clients(NameCli,Barrio,Direccion,latitud,longitud,TelCli,Frecuencia,Visita,hour,IdVendedor,Pedido,Ruta) values(:NameCli,:Barrio,:Direccion,:latitud,:longitud,:TelCli,:Frecuencia,:Visita,:hour,:IdVendedor,:Pedido,:Ruta)";
 
 $sql=$connect->prepare($sql);
 
@@ -53,11 +48,6 @@ $sql->bindParam(':TelCli',$NTelefono,PDO::PARAM_STR,25);
 $sql->bindParam(':Frecuencia',$NFrecuencia,PDO::PARAM_STR,25);
 $sql->bindParam(':Visita',$NVisita,PDO::PARAM_STR,25);
 $sql->bindParam(':hour',$Nhour,PDO::PARAM_STR,25);
-$sql->bindParam(':AM400g5',$NDAM400g5,PDO::PARAM_STR,25);
-$sql->bindParam(':AM550g5',$NDAM550g5,PDO::PARAM_STR,25);
-$sql->bindParam(':AM700g10',$NDAM700g10,PDO::PARAM_STR,25);
-$sql->bindParam(':AM800g20',$NDAM800g20,PDO::PARAM_STR, 25);
-$sql->bindParam(':masax1k',$n_d_masax1k,PDO::PARAM_STR, 25);
 $sql->bindParam(':IdVendedor',$NIdVendedor,PDO::PARAM_STR,25);
 $sql->bindParam(':Pedido',$NPedido,PDO::PARAM_STR, 25);
 $sql->bindParam(':Ruta',$Ruta,PDO::PARAM_STR, 25);

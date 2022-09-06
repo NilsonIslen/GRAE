@@ -86,7 +86,7 @@ echo "<div>";
 echo "<p> Por favor utiliza el codigo que enviamos al correo $Email  </p>";
 echo "<p> para crear tu clave de acceso </p>";
 echo "</div>";
-include "Forms/camClave.php";
+include "../Forms/camClave.php";
 
 exit();
     }else{

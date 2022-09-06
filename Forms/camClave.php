@@ -17,7 +17,7 @@
         <input type='text' name='ConfClave' placeholder='Confirmar Nueva Clave' required>
         <button type='submit' name='camClave'> Actualizar contraseña </button>
         </form>
-        <a href='index.php'> Regresar </a>
+        <a href='../index.php'> Regresar </a>
         
 
 

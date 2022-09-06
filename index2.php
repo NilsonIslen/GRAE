@@ -34,33 +34,19 @@ $fecha_actual=strtotime("$Fecha");
         include "Class/user.php";
     if($UsuarioS==$name_us&&$ClaveEnc==$key_us){        
                 include "profiles.php";
-                echo "<table>";
-                echo "<tr>";
-                echo "<td colspan='5'><p> ¡ Bienvenido $UsuarioS ! </p></td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> <p> AM400g5 </p></td><td> <p> AM550g5 </p> </td><td> <p> AM700g10 </p> </td><td> <p> AM800g20 </p> </td><td> <p> Masax1k </p> </td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<td> <p> $OAM400g5 </p> </td><td> <p> $OAM550g5 </p> </td><td> <p> $OAM700g10 </p> </td><td> <p> $OAM800g20 </p> </td> <td> <p> $o_masax1k </p> </td>";
-                echo "</tr>";
-                echo "</table>";
+                echo "<h2> ¡ Bienvenido $UsuarioS ! </h2>";
                     if($profile=='admin'){
-                        admin($opens_list,$new_product,$new_client,$list_clients,$list_delivery_men,$dispatch_history,$sales_history,$close_session,$closes_list);
-                        }
+                      admin($opens_list,$new_product,$new_client,$list_clients,$list_delivery_men,$sales_history,$close_session,$closes_list);
+                    }
                     if($profile=='rep'){
-                echo "<form action='php/position.php' method='POST'>";
-                echo "<input type='hidden' name='user' value='$UsuarioS'>"; 
-                echo "<input class='latitud' type='hidden' name='latitud' value=''>";
-                echo "<input class='longitud' type='hidden' name='longitud' value=''>";
-                echo "<button type='submit' name='upload_position'> Actualizar posicion </button>";
-                echo "</form>";
+                        echo "<div>";
+                        echo "<a href='https://www.google.com/maps/place/Manizales,+Caldas'> Maps </a>";
+                        echo "<a href='php/position.php?user=$UsuarioS'> Actualizar posicion </a>";
+                        echo "</div>";
                         rep($opens_list,$new_client,$close_session,$closes_list);
                         }
                         require "php/clients_to_visit.php";
                     }}}         
-
-
 ?>
 </body>
 </html>
