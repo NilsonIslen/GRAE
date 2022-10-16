@@ -5,6 +5,5 @@ $email_us=$result->email_us;
 $tel_us=$result->tel_us;
 $key_us=$result->key_us;
 $profile=$result->profile;
-$customer=$result->customer;
 $RutaV=$result->Ruta;
 ?>

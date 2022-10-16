@@ -1,5 +1,5 @@
 <?php
-$id_product=$result->id;
+$id_prod=$result->id;
 $reference=$result->referencia;
 $description=$result->descripcion;
 $weight_grams=$result->peso_gramos;

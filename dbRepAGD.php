@@ -31,10 +31,10 @@ $queryClients = $connect -> prepare($sqlClients);
 $queryClients -> execute(); 
 $resultsClients = $queryClients -> fetchAll(PDO::FETCH_OBJ);
             
-$sqlVent = "SELECT * FROM ventas2022"; 
-$queryVent = $connect -> prepare($sqlVent); 
-$queryVent -> execute(); 
-$resultsVent = $queryVent -> fetchAll(PDO::FETCH_OBJ);
+$sql_vent = "SELECT * FROM ventas2022"; 
+$query_vent = $connect -> prepare($sql_vent); 
+$query_vent -> execute(); 
+$results_vent = $query_vent -> fetchAll(PDO::FETCH_OBJ);
 
 
 

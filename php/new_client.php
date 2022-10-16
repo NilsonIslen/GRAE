@@ -35,7 +35,7 @@ if(isset($_POST['nuevoCliente'])){
 
 if($NColor==$NumAl){
 
-$sql="insert into clients(NameCli,Barrio,Direccion,latitud,longitud,TelCli,Frecuencia,Visita,hour,IdVendedor,Pedido,Ruta) values(:NameCli,:Barrio,:Direccion,:latitud,:longitud,:TelCli,:Frecuencia,:Visita,:hour,:IdVendedor,:Pedido,:Ruta)";
+$sql="insert into clients(NameCli,Barrio,Direccion,latitud,longitud,TelCli,Frecuencia,Visita,hour,Ruta) values(:NameCli,:Barrio,:Direccion,:latitud,:longitud,:TelCli,:Frecuencia,:Visita,:hour,:Ruta)";
 
 $sql=$connect->prepare($sql);
 
@@ -48,8 +48,6 @@ $sql->bindParam(':TelCli',$NTelefono,PDO::PARAM_STR,25);
 $sql->bindParam(':Frecuencia',$NFrecuencia,PDO::PARAM_STR,25);
 $sql->bindParam(':Visita',$NVisita,PDO::PARAM_STR,25);
 $sql->bindParam(':hour',$Nhour,PDO::PARAM_STR,25);
-$sql->bindParam(':IdVendedor',$NIdVendedor,PDO::PARAM_STR,25);
-$sql->bindParam(':Pedido',$NPedido,PDO::PARAM_STR, 25);
 $sql->bindParam(':Ruta',$Ruta,PDO::PARAM_STR, 25);
 
 $sql->execute();

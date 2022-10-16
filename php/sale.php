@@ -3,7 +3,7 @@ session_start();
 $UsuarioS = $_SESSION['usuario'];
 $ClaveS = $_SESSION['clave'];
 $id_us_s = $_SESSION['id_us'];
-$Fecha = date('d-m-Y');
+$fecha_1 = date('Y-m-d');
 require "../html/head2.html";
 include "../dbRepAGD.php";
 if(isset($_GET['seccion'])){
@@ -19,11 +19,11 @@ if($seccion == 'sale'){
     if($query_products -> rowCount() > 0){
         foreach($results_products as $result) {
         include "../Class/products.php";
-    echo "<option value=$id_product> $reference: $description, $$price </option>";
+    echo "<option value=$id_prod> $reference $$price </option>";
     }}
     echo "</select>";
     echo "<input type='number' name='amount' placeholder='Cantidad' required>";
-    echo "<button type='submit' name='add_product'> Agregar producto </button>";
+    echo "<button type='submit' name='add_product'> + </button>";
     echo "<a href='../index2.php'> Regresar </a>";
     echo "</form>";
     exit();
@@ -41,7 +41,7 @@ if(isset($_POST['add_product'])){
     }
     $fp = fopen("../Temp/$id_us_s/$id_cli/$product.php","w");
     fputs($fp, "<?php \n");
-    fputs($fp, "$"."fecha= '$Fecha'; \n");
+    fputs($fp, "$"."fecha_2= '$fecha_1'; \n");
     fputs($fp, "$"."amount= $amount; \n");
     fputs($fp, "?> \n");
     fclose($fp);
@@ -50,10 +50,11 @@ if(isset($_POST['add_product'])){
     $sequence=1;
     $count=0;
     echo "<form action='posts.php' method='POST'>";
-    echo "<a href='sale.php?id_cli=$id_cli&name_cli=$name_cli&seccion=sale'> + </a>";
+    echo "<input type='hidden' name='seller' value='$id_us_s'>";
+    echo "<input type='hidden' name='client' value='$id_cli'>";
     if($query_products -> rowCount() > 0){
         foreach($results_products as $result) {
-        require "../class/products.php";
+        require "../Class/products.php";
         $sequence2=$sequence++; 
         $file=file_exists("../Temp/$id_us_s/$id_cli/$sequence2.php");
         if($file){
@@ -61,15 +62,12 @@ if(isset($_POST['add_product'])){
         if($amount>=1){
         $price2=$price*$amount;
         $count=$count+$price2;
-        echo "<input type='hidden' name='seller$sequence2' value='$id_us_s'>";
-        echo "<input type='hidden' name='client$sequence2' value='$id_cli'>";
-        echo "<input type='hidden' name='product$sequence2' value='$id_product'>";
-        echo "<input type='hidden' name='amount$sequence2' value='$amount'>";
-        echo "<p> $reference ($description) ($$price) x <b> $amount </b> = $price2 </p>";
+        echo "<p> $reference $$price x $amount = $price2 </p>";
 
     }}}}
        echo "<input type='hidden' name='sequence' value='$sequence2'>";
        echo "<p> <b> Valor Total: $count </b> </p>";
+       echo "<a href='sale.php?id_cli=$id_cli&name_cli=$name_cli&seccion=sale'> + </a>";
        echo "<button type='submit' name='record_sale'> Registrar Venta </button>";
        echo "<a href='secciones.php?seccion=cancel_sale&id_cli=$id_cli'> Declinar venta </a>";
        echo "</form>";

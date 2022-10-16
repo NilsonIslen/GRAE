@@ -10,13 +10,12 @@ session_start();
     <link href="./Stl.css" rel="stylesheet" type="text/css">
     <link  rel="icon" href="Imgs/logo.png" type="image/png" />
     <title> Rutas AGD </title>
-    <script src="./coordenadas.js" defer></script>
 </head>
 <body>
 <?php
-$UsuarioS = $_SESSION['usuario'];
-$ClaveS = $_SESSION['clave'];
-$id_us_s = $_SESSION['id_us'];
+@$UsuarioS = $_SESSION['usuario'];
+@$ClaveS = $_SESSION['clave'];
+@$id_us_s = $_SESSION['id_us'];
 $ClaveEnc=md5($ClaveS);
 if($UsuarioS==''){
 echo "<div>";
@@ -33,17 +32,22 @@ $fecha_actual=strtotime("$Fecha");
         foreach($resultsUsers as $result){
         include "Class/user.php";
     if($UsuarioS==$name_us&&$ClaveEnc==$key_us){        
-                include "profiles.php";
+                echo "<div class='div-ini'>";
                 echo "<h2> ¡ Bienvenido $UsuarioS ! </h2>";
                     if($profile=='admin'){
-                      admin($opens_list,$new_product,$new_client,$list_clients,$list_delivery_men,$sales_history,$close_session,$closes_list);
+                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=new_product'> Nuevo producto </a>";
+                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=nuevoCliente'> Nuevo Cliente </a>";
+                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=list_products'> Listar Productos </a>";
+                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=listar_clientes'> Listar Clientes </a>";
+                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=listarRepartidores'> Listar Repartidores </a>";
+                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=reports'> Informes </a>";
+                      echo "<a href='sesion.php'> Cerrar sesion </a>";
+                      echo "</div>";
                     }
                     if($profile=='rep'){
-                        echo "<div>";
-                        echo "<a href='https://www.google.com/maps/place/Manizales,+Caldas'> Maps </a>";
-                        echo "<a href='php/position.php?user=$UsuarioS'> Actualizar posicion </a>";
+                        echo "<a href='php/secciones.php?usuario=$id_us&seccion=nuevoCliente'> Nuevo Cliente </a>";
+                        echo "<a href='sesion.php'> Cerrar Sesion </a>";
                         echo "</div>";
-                        rep($opens_list,$new_client,$close_session,$closes_list);
                         }
                         require "php/clients_to_visit.php";
                     }}}         

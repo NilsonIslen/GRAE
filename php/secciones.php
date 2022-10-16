@@ -8,6 +8,18 @@ include "../dbRepAGD.php";
 if(isset($_GET['seccion'])){
     $seccion=$_GET['seccion'];
 
+    if($seccion == 'change_neighborhoods'){
+        $br=$_GET['barrio'];
+    $fp = fopen("../Temp/$id_us_s.php","w");
+    fputs($fp, "<?php \n");
+    fputs($fp, "$"."neighborhood = '$br'; \n");
+    fputs($fp, "?> \n");
+    fclose($fp);
+    echo "<div>";
+    echo "<p> Acabas de cambiar de barrio a $br </p>";
+    echo "</div>";
+    }
+
 if($seccion == 'new_product'){
     require "../html/form_new_product.html";
 }
@@ -65,44 +77,33 @@ if($seccion=='listar_clientes'){
     require "../html/form_rutas.html";
 }
 
-if($seccion == 'despacho'){
+if($seccion == 'update'){
     $id_rep=$_GET['rep'];
     include "../Forms/despacho.php";
+}
+
+if($seccion == 'update_products'){
+    $id_product=$_GET['id'];
+    include "../Forms/update_products.php";
 }
 
     if($seccion == 'listarRepartidores'){
         echo "<a href='../index2.php'> Regresar </a>";
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Cliente actual </td> <td> Ruta </td>";
+        echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Ruta </td>";
         echo "</tr>";
     if($queryUsers -> rowCount() > 0){
     foreach($resultsUsers as $result) {
     include "../Class/user.php";
     echo "<tr align='center'>";
-                echo "<td> $id_us </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td> $customer </td> <td> <a href='secciones.php?rep=$id_us&seccion=despacho'> $RutaV </a> </td>";
+                echo "<td> <a href='secciones.php?rep=$id_us&seccion=update'> $id_us </a> </td> <td> $name_us </td> <td> $email_us </td> <td> $tel_us </td> <td> $profile </td> <td>  $RutaV </td>";
     echo "</tr>";
 }}
             echo "</table>";
             echo "<a href='../index2.php'> Regresar </a>";
             exit();
         }
-
-            if($seccion=='Pedidos'){
-                $IdCli=$_GET['client'];
-                echo "<Div>";
-                echo "<h2> Pedido de cliente id: $IdCli </h2>";
-                 echo "<form action='posts.php' method='POST'>";
-                 echo "<input type='hidden' name='Responsable' Value='$id_us_s'>";
-                 echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
-                 echo "<p> <input type='textarea' name='detalles' placeholder='Detalles'> </p>";
-                 echo "<p><button type='submit' name='Pedido'> Registrar pedido </button> </p>";
-                 echo "</form>";
-                   echo "<a href='../index2.php'> Regresar </a>";
-                    echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
-                    echo "</Div>";
-                    exit();
-                }
                 if($seccion=='frecuencia_visita'){
                     $IdCli=$_GET['client'];
                     echo "<Div>";
@@ -117,58 +118,66 @@ if($seccion == 'despacho'){
                         echo "</Div>";
                         exit();
                     }
+        
+                    if($seccion == 'list_products'){
+                        echo "<a href='../index2.php'> Regresar </a>";
+                        echo "<table align='center'>";
+                        echo "<tr align='center'>";
+                        echo "<td> id </td> <td> Referencia </td> <td> Descripcion </td> <td> Peso (gramos) </td>  <td> Precio </td>";
+                        echo "</tr>";
+                    if($query_products -> rowCount() > 0){
+                    foreach($results_products as $result) {
+                    include "../Class/products.php";
+                    echo "<tr align='center'>";
+                                echo "<td> <a href='secciones.php?id=$id_prod&seccion=update_products'> $id_prod </a> </td> <td> $reference </td> <td> $description </td> <td> $weight_grams </td> <td> $price </td>";
+                    echo "</tr>";
+                }}
+                    echo "</table>";
+                    echo "<a href='../index2.php'> Regresar </a>";
+                    exit();
+                    }
+                                if($seccion=='frecuencia_visita'){
+                                    $IdCli=$_GET['client'];
+                                    echo "<Div>";
+                                    echo "<h2> frecuencia de visita cliente id: $IdCli </h2>";
+                                     echo "<form action='posts.php' method='POST'>";
+                                     echo "<input type='hidden' name='IdCli' Value='$IdCli'>";
+                                     echo "<p> <input type='number' name='fdias' placeholder='dias' required> </p>";
+                                     echo "<p><button type='submit' name='frecuencia_visita'> Cambiar Frecuencia </button> </p>";
+                                     echo "</form>";
+                                        echo "<a href='../index2.php'> Regresar </a>";
+                                        echo "<p> <a href='sesion.php'> Cerrar sesion </a></p>";
+                                        echo "</Div>";
+                                        exit();
+                                    }
 
-                    if($seccion=='HVentas'){
+                    if($seccion=='reports'){
                         $UsuarioS=$_SESSION['usuario'];
                         $ClaveS=$_SESSION['clave'];
         
                          echo "<Div>";
                          echo "<a href='../index2.php'> Regresar </a>";
                          echo "<form action='posts.php' method='POST'>";
-                         echo "<p> Historial de Ventas :</p>";
+                         echo "<p> Informe :</p>";
                          echo "<input type='hidden' name='usuario' Value='$UsuarioS'>";
                          echo "<input type='hidden' name='clave' Value='$ClaveS'>";
-                         echo "<input type='Text' name='FechaHV' placeholder='Fecha (DD-MM-AAAA)'>";
-                         echo "<input type='Text' name='VendedorV' placeholder='Vendedor'>";
-                         echo "<input type='Text' name='ClienteV' placeholder='Cliente'>";
-                         echo "<button type='submit' name='HVentas'> Consultar </button>";
+                         echo"<select name='search_by' required>";
+                         echo"<option value=''> Consulta por: </option>";
+                         echo"<option value='seller'> Vendedor </option>";
+                         echo"<option value='client'> Cliente </option>";
+                         echo"<option value='product'> Producto </option>";
+                         echo"<option value='all'> Todo </option>";
+                         echo"</select>";
+                         echo "<input type='number' name='id' placeholder='id'>";
+                         echo "<input type='date' name='since' min='2022-03-25' max='2030-05-25' placeholder='Fecha inicial' required>";
+                         echo "<input type='date' name='until' min='2022-03-25' max='2030-05-25' placeholder='Fecha final'  required>";
+                         echo "<button type='submit' name='reports'> Consultar </button>";
                          echo "</form>";
                          echo "<a href='../index2.php'> Regresar </a>";
                          echo "</Div>";
                             exit();
                         }
 
-                        if($seccion=='cancelar_visita'){
-                            $id_client=$_GET['client'];
-                             if($queryUsers -> rowCount() > 0){
-                             foreach($resultsUsers as $result) {
-                             include "../Class/user.php";   
-                                         $query ="UPDATE users SET customer=0 WHERE name_us='$UsuarioS'";
-                                         $result=$connect->query($query);
-                                     }}
-                             if($queryClients -> rowCount() > 0){
-                             foreach($resultsClients as $result) {
-                             include "../Class/client.php";                    
-                                         $query = "UPDATE clients SET IdVendedor=0 WHERE IdCli=$id_client";
-                                         $result=$connect->query($query);
-                                      }}
-                     }
-
-                     if($seccion=='guardar_ubicacion'){
-                        $id_client=$_GET['id_c'];
-                        require "../Temp/$UsuarioS.php";
-                         if($queryUsers -> rowCount() > 0){
-                         if($queryClients -> rowCount() > 0){
-                         foreach($resultsClients as $result) {
-                         include "../Class/client.php";                    
-                                     $query = "UPDATE clients SET latitud=$lat, longitud=$long WHERE IdCli=$id_client";
-                                     $result=$connect->query($query);
-                        
-                        }}}
-                        echo "<div>";
-                        echo "<p'> Ubicacion guardada exitosamente </p>";
-                        echo "</div>";
-                        }
 }
 echo "<div>";
 echo "<a href='../index2.php'> Continuar </a>";
