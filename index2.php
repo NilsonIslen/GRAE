@@ -50,9 +50,8 @@ $fecha_actual=strtotime("$Fecha");
                         echo "</div>";
                         }
                         require "php/clients_to_visit.php";
-                        if($profile=="admin"){
                             echo "<div>";
-                            echo "<p> <b> Faltan $clientspv2 clientes por visitar </b> </p>";}
+                            echo "<p> <b> Faltan $clientspv2 clientes por visitar </b> </p>";
                             echo "</div>";
                     }}}         
 ?>

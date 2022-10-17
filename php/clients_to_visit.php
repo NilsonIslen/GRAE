@@ -16,10 +16,8 @@
              $fecha_actual=strtotime("$Fecha");
              $visita_unix=strtotime("$Visita");
                     if($fecha_actual>=$visita_unix){$clientspv2=$clientspv++;}
-                    if(($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $RutaV==$RutaC)
-                    or($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $profile=="admin")){
+                    if($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $RutaV<>0){
                     $cola2_b2=$cola2++;
-
                     if($neighborhood==$Barrio){
                     echo "<div>";
                         echo "<p class='p_br'> $NameCli ($Direccion $Barrio)</p>";
