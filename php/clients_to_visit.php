@@ -33,5 +33,4 @@
                     }
                     if($cola2==1){echo "<a href='php/secciones.php?seccion=change_neighborhoods&barrio=$Barrio'> $Barrio </a>";};
                 }}}}
-                echo "<p> <b> Faltan $clientspv2 clientes por visitar </b> </p>";
 ?>

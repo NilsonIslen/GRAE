@@ -33,26 +33,28 @@ if(isset($_POST['camClave'])){
     $Codigo = $_POST['Codigo'];
     $Clave = $_POST['Clave'];
     $ConfClave = $_POST['ConfClave'];
-    $ClaveEnc=md5($Clave);
-    $CodEnc=md5($Codigo);
-    $Arc = "Temp/$CodEnc.php";
+    $ClaveEnc= md5($Clave);
+    $CodEnc= md5($Codigo);
+    $Arc = "../Temp/$CodEnc.php";
+    include "../Temp/$CodEnc.php";
+    
     if(file_exists($Arc)){
-        include "$Arc";
-        if("$Code"=="$CodEnc" && "$Clave"=="$ConfClave"){
-        include "dbRepAGD.php";
+        include "../Temp/$CodEnc.php";
+        if($Code==$CodEnc && $Clave==$ConfClave){
+        include "../dbRepAGD.php";
         if($queryUsers -> rowCount() > 0){
         foreach($resultsUsers as $result) {
-        include "Class/user.php";
+        include "../Class/user.php";
                     if("$Email"=="$email_us"){
                      $query ="UPDATE users SET key_us='$ClaveEnc'
                      WHERE email_us='$Email'";
                     $result=$connect->query($query);
                 }}}
         unlink($Arc);
+echo "<div>";
 echo "<p> La contraseña se ha actualizado correctamente. </p>";
 echo "<p> Ahora puedes ingresar a la plataforma de repartos. </p>";
-echo "<div>";
-echo " <a href='index2.php'> Ir a la pagina principal para iniciar sesion </a>";
+echo " <a href='../index2.php'> Ir a la pagina principal para iniciar sesion </a>";
 echo "</div>";
 exit();
         }
