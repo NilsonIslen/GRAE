@@ -16,7 +16,8 @@
              $fecha_actual=strtotime("$Fecha");
              $visita_unix=strtotime("$Visita");
                     if($fecha_actual>=$visita_unix){$clientspv2=$clientspv++;}
-                    if($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $RutaV<>0){
+                    if($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $RutaV==$RutaC
+                    or ($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $profile=="admin")){
                     $cola2_b2=$cola2++;
                     if($neighborhood==$Barrio){
                     echo "<div>";
@@ -29,6 +30,6 @@
                     echo "</div>";
                     continue;
                     }
-                    if($cola2==1){echo "<a href='php/secciones.php?seccion=change_neighborhoods&barrio=$Barrio'> $Barrio </a>";};
+                    if($cola2==1){echo "<a href='php/secciones.php?seccion=change_neighborhoods&barrio=$Barrio'> $Barrio </a> <hr />";};
                 }}}}
 ?>

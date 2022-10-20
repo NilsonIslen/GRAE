@@ -2,6 +2,7 @@
 $cant_neighb=174;
 $Barrs=array(
     "Manizales",
+    "",
     "Alcazares",
     "Alferez Real",
     "Alta Leonora",

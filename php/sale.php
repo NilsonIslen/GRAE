@@ -12,7 +12,7 @@ if($seccion == 'sale'){
     $id_cli=$_GET['id_cli'];
     $name_cli=$_GET['name_cli'];
     echo "<form action='../php/sale.php' method='POST'>";
-    echo "<h2> Cliente: $name_cli </h2>";
+    echo "<h2> $name_cli </h2>";
     echo "<input type='hidden' name='id_cli' value='$id_cli' required>";
     echo "<input type='hidden' name='name_cli' value='$name_cli' required>";
     echo "<select name='product' required>";
@@ -34,7 +34,6 @@ if(isset($_POST['add_product'])){
     $name_cli = $_POST['name_cli'];
     $product = $_POST['product'];
     $amount = $_POST['amount'];
-
     $folder = "../Temp/$id_us_s/$id_cli";
     if (!file_exists($folder)) {
     mkdir($folder, 0777, true);
@@ -50,6 +49,7 @@ if(isset($_POST['add_product'])){
     $sequence=1;
     $count=0;
     echo "<form action='posts.php' method='POST'>";
+    echo "<h2> $name_cli </h2>";
     echo "<input type='hidden' name='seller' value='$id_us_s'>";
     echo "<input type='hidden' name='client' value='$id_cli'>";
     if($query_products -> rowCount() > 0){

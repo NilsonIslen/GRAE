@@ -86,13 +86,10 @@ echo "</div>";
                     $sequence = $_POST['sequence'];
                     $seller = $_POST["seller"];
                     $client = $_POST["client"];
-            
             for($seq=1; $seq<=$sequence; $seq++){
-                
                 $file=file_exists("../Temp/$seller/$client/$seq.php");
                 if($file){require "../Temp/$seller/$client/$seq.php";
                 }else{continue;}
-
                 if($amount>=1){
                     $sql="insert into ventas2022(date,hour,seller,client,product,amount) values(:date,:hour,:seller,:client,:product,:amount)";
                     $sql=$connect->prepare($sql);
@@ -105,7 +102,6 @@ echo "</div>";
                     $sql->execute();
                     $lastInsertId=$connect->lastInsertId();
                 }}
-
                 if($queryClients -> rowCount() > 0){
                     foreach($resultsClients as $result) {
                     include "../Class/client.php";
@@ -116,22 +112,19 @@ echo "</div>";
                             $result=$connect->query($query);                            
                         }      
                             }}
-
-                            $files = glob("../Temp/$id_us_s/$client/*"); 
+                            $files = glob("../Temp/$seller/$client/*"); 
                             foreach($files as $file){
                             if(is_file($file))
                             unlink($file);
                             }
-                            $folder = "../Temp/$id_us_s/$client";
+                            $folder = "../Temp/$seller/$client";
                             if (file_exists($folder)) {
-                                @rmdir($folder);
+                                rmdir($folder);
                             }  
-
                          echo "<div>";
                          echo "<P> Registro de venta exitoso </P>";
                          echo "<a href='../index2.php'> Regresar </a>";
                          echo "</div>";
-                        
                     }
 
 
@@ -140,6 +133,9 @@ echo "</div>";
         $tel = $_POST['tel'];
         $prof = $_POST['profile'];
         $Ruta = $_POST['Ruta'];
+        if($tel==''){$tel=$tel_us;}
+        if($prof==''){$prof=$profile;}
+        if($Ruta==''){$Ruta=$RutaV;}
         if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
             include "../Class/user.php";
@@ -174,46 +170,95 @@ echo "</div>";
 exit();
 }
 
-                if(isset($_POST['frecuencia_visita'])){ 
-                    $IdClient = $_POST['IdCli'];
-                    $fdias = $_POST['fdias'];
-                    if($queryClients -> rowCount() > 0){
-                        foreach($resultsClients as $result) {
-                        include "../Class/client.php";
-                                    if($IdClient==$IdCli){
-                                    $query ="UPDATE clients SET Frecuencia='$fdias' WHERE IdCli=$IdClient";
-                                    $result=$connect->query($query);
-                                    echo "<div>";
-                                    echo "<p> Hemos actualizado la frecuencia de visita para el Cliente $NameCli </p>";
-                                    echo "<p> Gracias por tu gestion </p>";
-                                    echo "<a href='../index2.php'> Regresar </a>";
-                                    echo "</div>";
-                                    exit();
-                                }}}}
+        if(isset($_POST['update_client'])){ 
+            $id_client = $_POST['id_client'];
+            $name_client = $_POST['name_client'];
+            $document_client = $_POST['document_client'];
+            $neighborhoods_client = $_POST['neighborhoods_client'];
+            $direction_client = $_POST['direction_client'];
+            $maps_client = $_POST['maps_client'];
+            $telephone_client = $_POST['telephone_client'];
+            $email_client = $_POST['email_client'];
+            $visit_client = $_POST['visit_client'];
+            $route_client = $_POST['route_client'];
 
-                                if(isset($_POST['listar_clientes'])){
-                                    $ruta=$_POST['ruta'];
-                                    echo "<a href='../index2.php'> Regresar </a>";
-                                    echo "<table align='center'>";
-                                    echo "<tr align='center'>";
-                                    echo "<td> ID </td> <td> Cliente </td> <td> Barrio </td> <td> Direccion </td>  <td> Telefono <td> Frecuencia </td> <td> Proxima Visita </td> <td> Ruta </td>";
-                                    echo "</tr>";
-                                    $cantidad=0;
-                                    if($queryClients -> rowCount() > 0){
-                                        foreach($resultsClients as $result) {
-                                        include "../Class/client.php";
-                                        if($RutaC==$ruta){
-                                        $cantid=$cantidad++;
-                                        echo "<tr align='center'>";
-                                            echo "<td> $IdCli </td> <td> $NameCli </td> <td> $Barrio </td> <td> $Direccion </td> <td> $TelCli </td> <td> $Frec </td> <td> $Visita </td>  <td> $RutaC </td> ";
-                                            echo "</tr>";
-                                    }}}
-                                    echo "</table>"; 
-                                    echo "<p> <b> $cantid clientes</b> </p>"; 
-                                    
-                                        echo '<a href="../index2.php"> Regresar </a>';
-                                        exit();
-                                    }
+            if($queryClients -> rowCount() > 0){
+            foreach($resultsClients as $result) {
+            include "../Class/client.php";
+            if($IdCli==$id_client){
+            if($name_client==''){$name_client=$NameCli;}
+            if($document_client==''){$document_client=$document_cli;}
+            if($neighborhoods_client==''){$neighborhoods_client=$Barrio;}
+            if($direction_client==''){$direction_client=$Direccion;}
+            if($maps_client==''){$maps_client=$maps;}
+            if($telephone_client==''){$telephone_client=$TelCli;}
+            if($email_client==''){$email_client=$email_cli;}
+            if($visit_client==''){$visit_client=$Visita;}
+            if($route_client==''){$route_client=$RutaC;}
+
+            $query ="UPDATE clients SET
+            NameCli='$name_client',
+            document='$document_client',
+            Barrio='$neighborhoods_client',
+            Direccion='$direction_client',
+            maps='$maps_client',
+            TelCli='$telephone_client',
+            email='$email_client',
+            Visita='$visit_client',
+            hour='$hour',
+            Ruta='$route_client'
+            WHERE IdCli=$id_client";
+            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta)";
+            $result=$connect->query($query);
+            echo "<div>";
+            echo "<p> Hemos actualizado la informacion del Cliente $NameCli </p>";
+            echo "<p> Gracias por tu gestion </p>";
+            echo "<a href='../index2.php'> Regresar </a>";
+            echo "</div>";
+            exit();
+            }}}}
+
+            if(isset($_POST['listar_clientes'])){
+            $ruta=$_POST['ruta'];
+            echo "<a href='../index2.php'> Regresar </a>";
+            echo "<table align='center'>";
+            echo "<tr align='center'>";
+            echo "<td > ID </td>
+            <td> Cliente </td> 
+            <td> Cedula o Nit </td> 
+            <td> Barrio </td> 
+            <td> Direccion </td> 
+            <td> Maps </td> 
+            <td> Telefono </td> 
+            <td> Correo electronico </td> 
+            <td> Proxima Visita </td> 
+            <td> Ruta </td>";
+            echo "</tr>";
+            $cantidad=0;
+            if($queryClients -> rowCount() > 0){
+            foreach($resultsClients as $result) {
+            include "../Class/client.php";
+            if($RutaC==$ruta){
+            $cantid=$cantidad++;
+            echo "<tr align='center'>";
+            echo "
+            <td> <a href='secciones.php?id_client=$IdCli&seccion=update_client'> $IdCli </a> </td> 
+            <td> $NameCli </td>
+            <td> $document_cli </td>
+            <td> $Barrio </td>            
+            <td> $Direccion </td>
+            <td> $maps </td>
+            <td> $TelCli </td>
+            <td> $email_cli </td>
+            <td> $Visita </td>
+            <td> $RutaC </td>
+            </tr>";
+            }}}
+            echo "</table>"; 
+            echo "<div> <p> <b> $cantid clientes</b> </p> </div>"; 
+            echo '<a href="../index2.php"> Regresar </a>';
+            exit();
+        }
 
 
 

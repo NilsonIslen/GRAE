@@ -1,11 +1,12 @@
 <?php
 $IdCli=$result->IdCli;
 $NameCli=$result->NameCli;
+$document_cli=$result->document;
 $Barrio=$result->Barrio;
 $Direccion=$result->Direccion;
 $maps=$result->maps;
 $TelCli=$result->TelCli;
-$Frec=$result->Frecuencia;
+$email_cli=$result->email;
 $Visita=$result->Visita;
 $hour=$result->hour;
 $RutaC=$result->Ruta;

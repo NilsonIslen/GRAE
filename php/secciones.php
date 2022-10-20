@@ -87,6 +87,48 @@ if($seccion == 'update_products'){
     include "../Forms/update_products.php";
 }
 
+if($seccion == 'update_client'){
+    $id_client=$_GET['id_client'];
+    if($queryClients -> rowCount() > 0){
+    foreach($resultsClients as $result) {
+    include "../Class/client.php";
+    include '../arrays/neighborhoods.php';
+    if($id_client==$IdCli){
+    echo "<form action='posts.php' method='POST'>";
+    echo "<h2> Cliente id: $id_client</h2>";
+    echo "<input type='hidden' name='id_client' value='$id_client'> <br />";
+    echo "<hr> Nombre: <br />";
+    echo "<input type='text' name='name_client' placeholder='$NameCli'> <br />";
+    echo "<hr> cc o nit: <br />";
+    echo "<input type='document' name='document_client' placeholder='$document_cli'> <br />";
+    echo "<hr> Barrio: <br />";
+    echo "<p> $Barrio </p> <br />";
+    echo "<select name='neighborhoods_client'>";
+        $Br = 1;
+        while($Br <= $cant_neighb){
+        $Barr = $Br++; 
+        $Barrios = $Barrs[$Barr]; 
+    echo "<option value='$Barrios'> $Barrios </option>";
+        }
+    echo "</select>";
+    echo "<hr> Direccion: <br />";
+    echo "<input type='text' name='direction_client' placeholder='$Direccion'> <br />";
+    echo "<hr> maps: <br />";
+    echo "<input type='text' name='maps_client' placeholder='$maps'> <br />";
+    echo "<hr> Telefono: <br />";
+    echo "<input type='number' name='telephone_client' placeholder='$TelCli'> <br />";
+    echo "<hr> Email: <br />";
+    echo "<input type='email' name='email_client' placeholder='$email_cli'> <br />";
+    echo "<hr> Visita: <br />";
+    echo "<input type='text' name='visit_client' placeholder='$Visita'> <br />";
+    echo "<hr> Ruta: <br />";
+    echo "<input type='number' name='route_client' placeholder='$RutaC'> <br />";
+    echo "<button type='submit' name='update_client'> Actualizar </button>";
+        
+    }
+
+}}}
+
     if($seccion == 'listarRepartidores'){
         echo "<a href='../index2.php'> Regresar </a>";
         echo "<table align='center'>";

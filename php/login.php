@@ -3,7 +3,6 @@ if(isset($_POST['Entrar'])){
     $UsuarioS = $_POST['usuario'];
     $clave = $_POST['clave'];
     $ClaveEnc=md5($clave);
-
     include "../dbRepAGD.php";
     if($queryUsers -> rowCount() > 0){
         foreach($resultsUsers as $result){

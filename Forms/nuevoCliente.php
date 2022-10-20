@@ -8,6 +8,7 @@ echo "<form action='../php/new_client.php' method='POST'>";
 echo "<input type='hidden' name='NumAl' Value='$Al'>";
 ?>
         <input type='text' name='Cliente' placeholder='Nombre del cliente o negocio' required>
+        <input type='text' name='document' placeholder='cedula o nit'>
         <?php
          include "../arrays/$ciudad.php";
          echo "<p> Barrio:</p>";
@@ -22,6 +23,7 @@ echo "<input type='hidden' name='NumAl' Value='$Al'>";
         ?>
                  <input type='text' name='Direccion' placeholder='Direccion'required>
                  <input type='text' name='Telefono' placeholder='Telefono'required>
+                 <input type='email' name='email' placeholder='Correo electronico'>
                  <select id='Sel0' name='Ruta'>"; ?>
                  <option value=1> Ruta 1 </option>
                  <option value=2> Ruta 2 </option>

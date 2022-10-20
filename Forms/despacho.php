@@ -13,13 +13,13 @@
         echo "<input type='hidden' name='clave' value='$ClaveS'>";
         echo "<input type='hidden' name='IdVendedor' value='$id_rep'>";
         ?>
-        <input type='number' name='tel' placeholder='Telefono'  required>
-        <select name='profile' required>
+        <input type='number' name='tel' placeholder='Telefono'>
+        <select name='profile'>
                 <option value=''> </option>
                 <option value='admin'> Administrador </option>
                 <option value='rep'> Repartidor </option>
                 </select>
-        <input type='number' name='Ruta' placeholder='Ruta' min='0' max='4' required>
+        <input type='number' name='Ruta' placeholder='Ruta' min='0' max='4'>
         <button type='submit' name='update'> Actualizar </button>
         </form>
 </body>
