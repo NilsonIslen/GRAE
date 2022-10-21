@@ -105,7 +105,7 @@ echo "</div>";
                 if($queryClients -> rowCount() > 0){
                     foreach($resultsClients as $result) {
                     include "../Class/client.php";
-                    $date2=$Visit[$Frec];
+                    $date2=$Visit[1];
                         if($IdCli==$client){
                         $neighborhood=$Barrio;
                             $query ="UPDATE clients SET Visita='$date2',hour='$hour' WHERE IdCli=$client";
@@ -129,21 +129,22 @@ echo "</div>";
 
 
     if(isset($_POST['update'])){
-        $IdVendedor = $_POST['IdVendedor'];
+        $id_rep = $_POST['id_rep'];
         $tel = $_POST['tel'];
-        $prof = $_POST['profile'];
-        $Ruta = $_POST['Ruta'];
-        if($tel==''){$tel=$tel_us;}
-        if($prof==''){$prof=$profile;}
-        if($Ruta==''){$Ruta=$RutaV;}
+        $prof = $_POST['prof'];
+        $ruta = $_POST['ruta'];
         if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
             include "../Class/user.php";
-                        if($IdVendedor==$id_us){
-                         $query ="UPDATE users SET tel_us=$tel, profile='$prof', Ruta=$Ruta WHERE id_us=$IdVendedor";
+            if($tel==''){$tel=$tel_us;}
+            if($prof==''){$prof=$profile;}
+            if($ruta==''){$ruta=$RutaV;}
+                        if($id_rep==$id_us){
+                        $query ="UPDATE users SET tel_us=$tel, profile='$prof', Ruta=$ruta WHERE id_us=$id_rep";
                         $result=$connect->query($query);
         
 echo "<div>";
+echo " id_rep: $id_rep -----  id_us: $id_us ";
 echo "<p> Se acaba de actualizar ruta para el repartidor $name_us</p>";
 echo "</div>";
 }}}
@@ -181,6 +182,7 @@ exit();
             $email_client = $_POST['email_client'];
             $visit_client = $_POST['visit_client'];
             $route_client = $_POST['route_client'];
+            $cola_client = $_POST['tail_client'];
 
             if($queryClients -> rowCount() > 0){
             foreach($resultsClients as $result) {
@@ -195,6 +197,7 @@ exit();
             if($email_client==''){$email_client=$email_cli;}
             if($visit_client==''){$visit_client=$Visita;}
             if($route_client==''){$route_client=$RutaC;}
+            if($cola_client==''){$cola_client=$cola;}
 
             $query ="UPDATE clients SET
             NameCli='$name_client',
@@ -206,9 +209,10 @@ exit();
             email='$email_client',
             Visita='$visit_client',
             hour='$hour',
-            Ruta='$route_client'
+            Ruta='$route_client',
+            cola='$cola_client'
             WHERE IdCli=$id_client";
-            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta)";
+            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta,cola) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta,:cola)";
             $result=$connect->query($query);
             echo "<div>";
             echo "<p> Hemos actualizado la informacion del Cliente $NameCli </p>";

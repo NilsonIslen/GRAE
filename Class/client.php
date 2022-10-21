@@ -10,4 +10,5 @@ $email_cli=$result->email;
 $Visita=$result->Visita;
 $hour=$result->hour;
 $RutaC=$result->Ruta;
+$cola=$result->cola;
 ?>

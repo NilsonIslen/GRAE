@@ -3,11 +3,15 @@
         if($file_temp){
         include "Temp/$id_us_s.php";}
         include "arrays/neighborhoods.php";
-            $cola_b=0;
-            while($cola_b <= $cant_neighb){
-               $cola_b2 = $cola_b++; 
-               $cola = $Barrs[$cola_b2];  
-            $cola2=0;
+            $cola2=1;
+            if(isset($_GET['seccion'])){
+            $seccion = $_GET['seccion'];
+            $cola4 = $_GET['cola4'];
+            if($seccion=='omit'){
+            $cola5 = $cola4+1;
+            $cola2=$cola5;}}
+            while($cola2 <= 150){
+               $cola3 = $cola2++; 
             $clientspv=0;
              if($queryClients -> rowCount() > 0){
              foreach($resultsClients as $result) {
@@ -16,20 +20,33 @@
              $fecha_actual=strtotime("$Fecha");
              $visita_unix=strtotime("$Visita");
                     if($fecha_actual>=$visita_unix){$clientspv2=$clientspv++;}
-                    if($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $RutaV==$RutaC
-                    or ($fecha_actual>=$visita_unix && "$cola"=="$Barrio" && $profile=="admin")){
-                    $cola2_b2=$cola2++;
-                    if($neighborhood==$Barrio){
+                    if($fecha_actual>=$visita_unix
+                    && $RutaV==$RutaC 
+                    && $cola3==$cola
+                    or ($fecha_actual>=$visita_unix
+                    && $cola3==$cola
+                    && $profile=="admin")){
                     echo "<div>";
-                        echo "<p class='p_br'> $NameCli ($Direccion $Barrio)</p>";
+                        echo "<p class='p_br'>";
+                        echo " $NameCli <br />";
+                        echo " $Barrio <br />";
+                        echo " $Direccion</p>";
                         if($profile=='rep'){
                         echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&seccion=sale'> Registrar visita </a>";
                         }
                         echo "<a href='tel:$TelCli'> Llamar </a> </p>";
                         echo "<a href='$maps'> Maps </a> </p>";
+                        echo "<a href='index2.php?seccion=omit&cola4=$cola3'> Aplazar </a>";
+
+                        
                     echo "</div>";
-                    continue;
-                    }
-                    if($cola2==1){echo "<a href='php/secciones.php?seccion=change_neighborhoods&barrio=$Barrio'> $Barrio </a> <hr />";};
-                }}}}
+                    exit();
+                   }}}
+                   if($profile=="admin" && $cola3==1){
+                    echo "<div>";
+                    echo "<p> <b> Faltan $clientspv2 clientes por visitar </b> </p>";
+                    echo "</div>";
+                   }
+                   
+                }
 ?>

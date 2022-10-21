@@ -42,18 +42,17 @@ $fecha_actual=strtotime("$Fecha");
                       echo "<a href='php/secciones.php?usuario=$id_us&seccion=listarRepartidores'> Listar Repartidores </a>";
                       echo "<a href='php/secciones.php?usuario=$id_us&seccion=reports'> Informes </a>";
                       echo "<a href='sesion.php'> Cerrar sesion </a>";
+                      echo "<a href='index2.php'> Retomar cola </a>";
                       echo "</div>";
                     }
                     if($profile=='rep'){
                         echo "<a href='php/secciones.php?usuario=$id_us&seccion=nuevoCliente'> Nuevo Cliente </a>";
                         echo "<a href='sesion.php'> Cerrar Sesion </a>";
+                        echo "<a href='index2.php'> Retomar cola </a>";
                         echo "</div>";
                         }
-                        require "php/clients_to_visit.php";
-                            echo "<div>";
-                            echo "<p> <b> Faltan $clientspv2 clientes por visitar </b> </p>";
-                            echo "</div>";
-                    }}}         
+                            require "php/clients_to_visit.php";
+                        }}}         
 ?>
 </body>
 </html>

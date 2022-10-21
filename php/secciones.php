@@ -123,6 +123,9 @@ if($seccion == 'update_client'){
     echo "<input type='text' name='visit_client' placeholder='$Visita'> <br />";
     echo "<hr> Ruta: <br />";
     echo "<input type='number' name='route_client' placeholder='$RutaC'> <br />";
+    echo "<hr> Cola: <br />";
+    echo "<input type='number' name='tail_client' placeholder='$cola'> <br />";
+    echo "<hr> <br />";
     echo "<button type='submit' name='update_client'> Actualizar </button>";
         
     }
