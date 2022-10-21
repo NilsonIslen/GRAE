@@ -236,7 +236,8 @@ exit();
             <td> Telefono </td> 
             <td> Correo electronico </td> 
             <td> Proxima Visita </td> 
-            <td> Ruta </td>";
+            <td> Ruta </td>
+            <td> Cola </td>";
             echo "</tr>";
             $cantidad=0;
             if($queryClients -> rowCount() > 0){
@@ -256,6 +257,7 @@ exit();
             <td> $email_cli </td>
             <td> $Visita </td>
             <td> $RutaC </td>
+            <td> $cola </td>
             </tr>";
             }}}
             echo "</table>"; 
