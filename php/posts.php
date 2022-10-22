@@ -82,7 +82,7 @@ echo "</div>";
 
     if(isset($_POST['record_sale'])){ 
                     $date = date('d-m-Y');
-                    $hour = date('H:i');
+                    $hour2 = date('H:i');
                     $sequence = $_POST['sequence'];
                     $seller = $_POST["seller"];
                     $client = $_POST["client"];
@@ -108,7 +108,7 @@ echo "</div>";
                     $date2=$Visit[1];
                         if($IdCli==$client){
                         $neighborhood=$Barrio;
-                            $query ="UPDATE clients SET Visita='$date2',hour='$hour' WHERE IdCli=$client";
+                            $query ="UPDATE clients SET Visita='$date2',hour='$hour2' WHERE IdCli=$client";
                             $result=$connect->query($query);                            
                         }      
                             }}
@@ -182,7 +182,6 @@ exit();
             $email_client = $_POST['email_client'];
             $visit_client = $_POST['visit_client'];
             $route_client = $_POST['route_client'];
-            $cola_client = $_POST['tail_client'];
 
             if($queryClients -> rowCount() > 0){
             foreach($resultsClients as $result) {
@@ -197,7 +196,6 @@ exit();
             if($email_client==''){$email_client=$email_cli;}
             if($visit_client==''){$visit_client=$Visita;}
             if($route_client==''){$route_client=$RutaC;}
-            if($cola_client==''){$cola_client=$cola;}
 
             $query ="UPDATE clients SET
             NameCli='$name_client',
@@ -209,10 +207,9 @@ exit();
             email='$email_client',
             Visita='$visit_client',
             hour='$hour',
-            Ruta='$route_client',
-            cola='$cola_client'
+            Ruta='$route_client'
             WHERE IdCli=$id_client";
-            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta,cola) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta,:cola)";
+            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta)";
             $result=$connect->query($query);
             echo "<div>";
             echo "<p> Hemos actualizado la informacion del Cliente $NameCli </p>";
@@ -236,8 +233,7 @@ exit();
             <td> Telefono </td> 
             <td> Correo electronico </td> 
             <td> Proxima Visita </td> 
-            <td> Ruta </td>
-            <td> Cola </td>";
+            <td> Ruta </td>";
             echo "</tr>";
             $cantidad=0;
             if($queryClients -> rowCount() > 0){
@@ -257,7 +253,6 @@ exit();
             <td> $email_cli </td>
             <td> $Visita </td>
             <td> $RutaC </td>
-            <td> $cola </td>
             </tr>";
             }}}
             echo "</table>"; 
