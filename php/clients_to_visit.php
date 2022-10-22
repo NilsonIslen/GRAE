@@ -10,9 +10,10 @@
             if($seccion=='omit'){
             $cola5 = $cola4+1;
             $cola2=$cola5;}}
-            while($cola2 <= 150){
+            while($cola2 <= 100){
                $cola3 = $cola2++; 
             $clientspv=0;
+            $comtrol=0;
              if($queryClients -> rowCount() > 0){
              foreach($resultsClients as $result) {
              include "Class/client.php";
@@ -31,22 +32,27 @@
                         echo " $NameCli <br />";
                         echo " $Barrio <br />";
                         echo " $Direccion</p>";
+                        if($profile=='admin'){
+                            echo "<p> Ruta $RutaC </p>";
+                            }
                         if($profile=='rep'){
                         echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&seccion=sale'> Registrar visita </a>";
                         }
                         echo "<a href='tel:$TelCli'> Llamar </a> </p>";
-                        echo "<a href='$maps'> Maps </a> </p>";
-                        echo "<a href='index2.php?seccion=omit&cola4=$cola3'> Aplazar </a>";
-
+                        if($maps<>''){echo "<a href='$maps'> Maps </a> </p>";}
                         
                     echo "</div>";
-                    exit();
+                    $control2=$control++;
                    }}}
                    if($profile=="admin" && $cola3==1){
                     echo "<div>";
                     echo "<p> <b> Faltan $clientspv2 clientes por visitar </b> </p>";
                     echo "</div>";
                    }
-                   
+                  if($control2>0){
+                    echo "<div>";
+                    echo "<a href='index2.php?seccion=omit&cola4=$cola3'> Aplazar </a>";
+                    echo "</div>";
+                    exit();}
                 }
 ?>
