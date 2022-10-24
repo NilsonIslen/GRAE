@@ -121,6 +121,8 @@ if($seccion == 'update_client'){
     echo "<input type='email' name='email_client' placeholder='$email_cli'> <br />";
     echo "<hr> Visita: <br />";
     echo "<input type='text' name='visit_client' placeholder='$Visita'> <br />";
+    echo "<hr> Hora: <br />";
+    echo "<input type='text' name='hour_visit_client' placeholder='$hour'> <br />";
     echo "<hr> Ruta: <br />";
     echo "<input type='number' name='route_client' placeholder='$RutaC'> <br />";
     echo "<hr> <br />";

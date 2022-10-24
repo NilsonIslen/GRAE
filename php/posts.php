@@ -136,15 +136,14 @@ echo "</div>";
         if($queryUsers -> rowCount() > 0){
             foreach($resultsUsers as $result) {
             include "../Class/user.php";
-            if($tel==''){$tel=$tel_us;}
-            if($prof==''){$prof=$profile;}
-            if($ruta==''){$ruta=$RutaV;}
                         if($id_rep==$id_us){
+                            if($tel==''){$tel=$tel_us;}
+                            if($prof=='profile'){$prof=$profile;}
+                            if($ruta==''){$ruta=$RutaV;}
                         $query ="UPDATE users SET tel_us=$tel, profile='$prof', Ruta=$ruta WHERE id_us=$id_rep";
                         $result=$connect->query($query);
         
 echo "<div>";
-echo " id_rep: $id_rep -----  id_us: $id_us ";
 echo "<p> Se acaba de actualizar ruta para el repartidor $name_us</p>";
 echo "</div>";
 }}}
@@ -181,6 +180,7 @@ exit();
             $telephone_client = $_POST['telephone_client'];
             $email_client = $_POST['email_client'];
             $visit_client = $_POST['visit_client'];
+            $hour_visit_client = $_POST['hour_visit_client'];
             $route_client = $_POST['route_client'];
 
             if($queryClients -> rowCount() > 0){
@@ -195,6 +195,7 @@ exit();
             if($telephone_client==''){$telephone_client=$TelCli;}
             if($email_client==''){$email_client=$email_cli;}
             if($visit_client==''){$visit_client=$Visita;}
+            if($hour_visit_client==''){$hour_visit_client=$hour;}
             if($route_client==''){$route_client=$RutaC;}
 
             $query ="UPDATE clients SET
@@ -206,7 +207,7 @@ exit();
             TelCli='$telephone_client',
             email='$email_client',
             Visita='$visit_client',
-            hour='$hour',
+            hour='$hour_visit_client',
             Ruta='$route_client'
             WHERE IdCli=$id_client";
             $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta)";
@@ -233,6 +234,7 @@ exit();
             <td> Telefono </td> 
             <td> Correo electronico </td> 
             <td> Proxima Visita </td> 
+            <td> Hora </td> 
             <td> Ruta </td>";
             echo "</tr>";
             $cantidad=0;
@@ -252,6 +254,7 @@ exit();
             <td> $TelCli </td>
             <td> $email_cli </td>
             <td> $Visita </td>
+            <td> $hour </td>
             <td> $RutaC </td>
             </tr>";
             }}}
