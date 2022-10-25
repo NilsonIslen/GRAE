@@ -9,5 +9,6 @@ $TelCli=$result->TelCli;
 $email_cli=$result->email;
 $Visita=$result->Visita;
 $hour=$result->hour;
+$frequency=$result->frequency;
 $RutaC=$result->Ruta;
 ?>

@@ -5,6 +5,7 @@
         include "arrays/neighborhoods.php";
         include "arrays/time.php";
 
+        $clients_global=0;
         $clients_global_on_hold=0;
         $clients_route_on_hold=0;
         if($queryClients -> rowCount() > 0){
@@ -13,6 +14,9 @@
         $Fecha = date('d-m-Y');
         $fecha_actual=strtotime("$Fecha");
         $visita_unix=strtotime("$Visita");
+
+        if($IdCli<>''){
+        $clients_global_2=$clients_global++;}
         if($fecha_actual>=$visita_unix){
         $clients_global_on_hold_2=$clients_global_on_hold++;}
         if($fecha_actual>=$visita_unix && $RutaC==$RutaV){
@@ -20,7 +24,7 @@
         }}
         echo "<div>";
         if($profile=="admin"){
-        echo "<p> <b> $clients_global_on_hold_2 clientes en espera </b> </p>";
+        echo "<p> <b> $clients_global_on_hold_2 clientes en espera de $clients_global_2 </b> </p>";
         }
         if($profile=="rep"){
         echo "<p> <b> $clients_route_on_hold_2 clientes en espera </b> </p>";
@@ -50,10 +54,10 @@
                     && $hour==$time2
                     && $profile=="admin")){
                         echo "<div>";
-                        echo "<p> Ruta $RutaC </p>";
+                        echo "<p> <b> Ruta $RutaC </b> </p>";
+                        echo "<p> <b> $Barrio </b> </p>";
                         echo "<p class='p_br'>";
                         echo " $NameCli <br />";
-                        echo " $Barrio <br />";
                         echo " $Direccion</p>";
                         echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&seccion=sale'>
                         Registrar visita </a>";

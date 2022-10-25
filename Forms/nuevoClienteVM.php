@@ -21,7 +21,7 @@
                  <input type='text' name='Direccion' placeholder='Direccion'required>
                  <input type='text' name='Telefono' placeholder='Telefono'required>
                  <input type='email' name='email' placeholder='Correo electronico'>
-                 
+                 <input type='number' name='frequency' placeholder='Frecuencia de visita' min='1' max='30' required>
                  <select id='Sel0' name='Ruta'>"; ?>
                  <option value=1> Ruta 1 </option>
                  <option value=2> Ruta 2 </option>

@@ -123,6 +123,8 @@ if($seccion == 'update_client'){
     echo "<input type='text' name='visit_client' placeholder='$Visita'> <br />";
     echo "<hr> Hora: <br />";
     echo "<input type='text' name='hour_visit_client' placeholder='$hour'> <br />";
+    echo "<hr> Frecuencia: <br />";
+    echo "<input type='number' name='frequency' placeholder='$frequency' min='1' max='30'> <br />";
     echo "<hr> Ruta: <br />";
     echo "<input type='number' name='route_client' placeholder='$RutaC'> <br />";
     echo "<hr> <br />";

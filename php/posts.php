@@ -40,37 +40,49 @@ echo "</div>";
                 echo "<tr align='center'>";
                 echo "<td> id venta </td> <td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Producto </td> <td> Cantidad </td> <td> Valor </td>";
                 echo "</tr>";
+
+                
+
                 $packages=0;
                 $balance=0;
                 if($query_vent -> rowCount() > 0){
                 foreach($results_vent as $result) {
                 include "../Class/vent.php";
-                if($query_products -> rowCount() > 0){
-                foreach($results_products as $result) {
-                include "../Class/products.php";
-                if($queryClients -> rowCount() > 0){
-                foreach($resultsClients as $result) {
-                include "../Class/client.php";
-                if($queryUsers -> rowCount() > 0){
-                foreach($resultsUsers as $result) {
-                include "../Class/user.php";
-                if($seller_v==$id_us){
-                if($client_v==$IdCli){
-                if($product_v==$id_prod){
                 if($search_by=='seller'){$compare=$seller_v;}
                 if($search_by=='client'){$compare=$client_v;}
                 if($search_by=='product'){$compare=$product_v;}
                 if($search_by=='all'){$compare=$id_query;}
                 if($id_query==$compare && $date_v>=$since && $date_v<=$until){
-                $worth=$price*$amount_v;
-                $packages=$amount_v+$packages;
+
+                    if($query_products -> rowCount() > 0){
+                        foreach($results_products as $result) {
+                        include "../Class/products.php";
+                        if($product_v==$id_prod){
+                            $product_v_2=$reference;
+                            $price_2=$price;
+                            $amount_v_2=$amount_v;
+                        }}}
+
+                    if($queryUsers -> rowCount() > 0){
+                        foreach($resultsUsers as $result) {
+                        include "../Class/user.php";
+                        if($seller_v==$id_us){$seller_v_2=$name_us;}
+                    }}
+                
+                    if($queryClients -> rowCount() > 0){
+                        foreach($resultsClients as $result) {
+                        include "../Class/client.php";
+                        if($client_v==$IdCli){$client_v_2=$NameCli;}
+                    }}
+
+
+
+                $worth=$price_2*$amount_v_2;
+                $packages=$amount_v_2+$packages;
                 $balance=$worth+$balance;
                 echo "<tr align='center'>";
-                echo "<td> $id_v </td> <td> $date_v </td> <td> $hora_v </td> <td> $name_us </td> <td> $NameCli </td> <td> $reference </td> <td> $amount_v </td> <td> $$worth </td>";
+                echo "<td> $id_v </td> <td> $date_v </td> <td> $hora_v </td> <td> $seller_v_2 </td> <td> $client_v_2 </td> <td> $product_v_2 </td> <td> $amount_v </td> <td> $$worth </td>";
                 echo "</tr>";
-                }}}
-                }}}
-                }}}
                 }}}
                 echo "<tr align='center'>";
                 echo "<td colspan='6'> <b> Total </b> </td> <td> <b> $packages </b> </td> <td> <b> $$balance </b> </td>";
@@ -94,7 +106,7 @@ echo "</div>";
                     $sql="insert into ventas2022(date,hour,seller,client,product,amount) values(:date,:hour,:seller,:client,:product,:amount)";
                     $sql=$connect->prepare($sql);
                     $sql->bindParam(':date',$fecha_2,PDO::PARAM_STR, 25);
-                    $sql->bindParam(':hour',$hour,PDO::PARAM_STR, 25);
+                    $sql->bindParam(':hour',$hour2,PDO::PARAM_STR, 25);
                     $sql->bindParam(':seller',$seller,PDO::PARAM_STR,25);
                     $sql->bindParam(':client',$client,PDO::PARAM_STR,25);
                     $sql->bindParam(':product',$seq,PDO::PARAM_STR,25);
@@ -105,8 +117,8 @@ echo "</div>";
                 if($queryClients -> rowCount() > 0){
                     foreach($resultsClients as $result) {
                     include "../Class/client.php";
-                    $date2=$Visit[1];
                         if($IdCli==$client){
+                        $date2=$Visit[$frequency];
                         $neighborhood=$Barrio;
                             $query ="UPDATE clients SET Visita='$date2',hour='$hour2' WHERE IdCli=$client";
                             $result=$connect->query($query);                            
@@ -181,6 +193,7 @@ exit();
             $email_client = $_POST['email_client'];
             $visit_client = $_POST['visit_client'];
             $hour_visit_client = $_POST['hour_visit_client'];
+            $frequency_2 = $_POST['frequency'];
             $route_client = $_POST['route_client'];
 
             if($queryClients -> rowCount() > 0){
@@ -196,6 +209,7 @@ exit();
             if($email_client==''){$email_client=$email_cli;}
             if($visit_client==''){$visit_client=$Visita;}
             if($hour_visit_client==''){$hour_visit_client=$hour;}
+            if($frequency_2==''){$frequency_2=$frequency;}
             if($route_client==''){$route_client=$RutaC;}
 
             $query ="UPDATE clients SET
@@ -208,9 +222,10 @@ exit();
             email='$email_client',
             Visita='$visit_client',
             hour='$hour_visit_client',
+            frequency='$frequency_2',
             Ruta='$route_client'
             WHERE IdCli=$id_client";
-            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta)";
+            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,frequency,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:frequency,:Ruta)";
             $result=$connect->query($query);
             echo "<div>";
             echo "<p> Hemos actualizado la informacion del Cliente $NameCli </p>";

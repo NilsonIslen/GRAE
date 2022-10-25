@@ -15,6 +15,7 @@ if(isset($_POST['nuevoCliente'])){
     $NumAl=$_POST['NumAl'];
     $NVisita=date('d-m-Y');
     $Nhour=date('H:i');
+    $n_frequency=$_POST['frequency'];
     $Ruta=$_POST['Ruta'];
     include "../dbRepAGD.php";
     if($queryClients -> rowCount() > 0){
@@ -27,7 +28,7 @@ if(isset($_POST['nuevoCliente'])){
          } 
 }}
 if($NColor==$NumAl){
-$sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:Ruta)";
+$sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,frequency,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:frequency,:Ruta)";
 $sql=$connect->prepare($sql);
 $sql->bindParam(':NameCli',$NCliente,PDO::PARAM_STR, 25);
 $sql->bindParam(':document',$document,PDO::PARAM_STR, 25);
@@ -38,6 +39,7 @@ $sql->bindParam(':TelCli',$NTelefono,PDO::PARAM_STR,25);
 $sql->bindParam(':email',$email,PDO::PARAM_STR,25);
 $sql->bindParam(':Visita',$NVisita,PDO::PARAM_STR,25);
 $sql->bindParam(':hour',$Nhour,PDO::PARAM_STR,25);
+$sql->bindParam(':frequency',$n_frequency,PDO::PARAM_STR,25);
 $sql->bindParam(':Ruta',$Ruta,PDO::PARAM_STR, 25);
 $sql->execute();
 $lastInsertId=$connect->lastInsertId();
