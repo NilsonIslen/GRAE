@@ -19,8 +19,13 @@ if($seccion == 'sale'){
     if($query_products -> rowCount() > 0){
         foreach($results_products as $result) {
         include "../Class/products.php";
+    if($id_prod<>3
+    && $id_prod<>4
+    && $id_prod<>8
+    && $id_prod<>11
+    ){
     echo "<option value=$id_prod> $reference $$price </option>";
-    }}
+    }}}
     echo "</select>";
     echo "<input type='number' name='amount' placeholder='Cantidad' required>";
     echo "<button type='submit' name='add_product'> + </button>";
