@@ -29,7 +29,6 @@
         if($profile=="rep"){
         echo "<p> <b> $clients_route_on_hold_2 clientes en espera </b> </p>";
         }
-        echo "<a href='index2.php'> Retomar cola </a>";
         echo "</div>";
             $cola2=0;
             if(isset($_GET['seccion'])){
@@ -60,11 +59,13 @@
                         echo " $NameCli <br />";
                         echo " $Direccion</p>";
                         echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&seccion=sale'>
-                        Registrar visita </a>";
+                        Registrar venta </a>";
+                        if($IdCli<>4){
                         echo "<a href='tel:$TelCli'> Llamar </a> </p>";
                         if($maps<>''){echo "<a href='$maps'> Maps </a> </p>";}
                         echo "<a href='index2.php?seccion=omit&cola4=$cola3'> Aplazar </a>";
-                         echo "</div>";
+                        echo "<a href='index2.php'> Retomar cola </a>";
+                         echo "</div>";}
                     exit();
                    }}
                    }}

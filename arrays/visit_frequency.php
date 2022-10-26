@@ -1,5 +1,6 @@
 <?php
 $Visit=array(
+0=>$Fecha1D = date('d-m-Y',strtotime($Fecha.'+0 days')),
 1=>$Fecha1D = date('d-m-Y',strtotime($Fecha.'+1 days')),
 2=>$Fecha2D = date('d-m-Y',strtotime($Fecha.'+2 days')),
 3=>$Fecha3D = date('d-m-Y',strtotime($Fecha.'+3 days')),

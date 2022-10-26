@@ -39,7 +39,7 @@ $fecha_actual=strtotime("$Fecha");
                       echo "<a href='php/secciones.php?usuario=$id_us&seccion=nuevoCliente'> Nuevo Cliente </a>";
                       echo "<a href='php/secciones.php?usuario=$id_us&seccion=list_products'> Listar Productos </a>";
                       echo "<a href='php/secciones.php?usuario=$id_us&seccion=listar_clientes'> Listar Clientes </a>";
-                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=listarRepartidores'> Listar Repartidores </a>";
+                      echo "<a href='php/secciones.php?usuario=$id_us&seccion=listarRepartidores'> Listar Usuarios </a>";
                       echo "<a href='php/secciones.php?usuario=$id_us&seccion=reports'> Informes </a>";
                       echo "<a href='sesion.php'> Cerrar sesion </a>";
                       echo "</div>";

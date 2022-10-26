@@ -38,11 +38,8 @@ echo "</div>";
                 echo "<a href='../index2.php'> Regresar </a>";
                 echo "<table align='center'>";
                 echo "<tr align='center'>";
-                echo "<td> id venta </td> <td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Producto </td> <td> Cantidad </td> <td> Valor </td>";
+                echo "<td> id venta </td> <td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Barrio </td> <td> Producto </td> <td> Cantidad </td> <td> Valor </td>";
                 echo "</tr>";
-
-                
-
                 $packages=0;
                 $balance=0;
                 if($query_vent -> rowCount() > 0){
@@ -72,20 +69,21 @@ echo "</div>";
                     if($queryClients -> rowCount() > 0){
                         foreach($resultsClients as $result) {
                         include "../Class/client.php";
-                        if($client_v==$IdCli){$client_v_2=$NameCli;}
+                        if($client_v==$IdCli){
+                            $client_v_2=$NameCli;
+                            $barrio_v_2=$Barrio;
+                        }
                     }}
-
-
 
                 $worth=$price_2*$amount_v_2;
                 $packages=$amount_v_2+$packages;
                 $balance=$worth+$balance;
                 echo "<tr align='center'>";
-                echo "<td> $id_v </td> <td> $date_v </td> <td> $hora_v </td> <td> $seller_v_2 </td> <td> $client_v_2 </td> <td> $product_v_2 </td> <td> $amount_v </td> <td> $$worth </td>";
+                echo "<td> $id_v </td> <td> $date_v </td> <td> $hora_v </td> <td> $seller_v_2 </td> <td> $client_v_2 </td> <td> $barrio_v_2 </td> <td> $product_v_2 </td> <td> $amount_v </td> <td> $$worth </td>";
                 echo "</tr>";
                 }}}
                 echo "<tr align='center'>";
-                echo "<td colspan='6'> <b> Total </b> </td> <td> <b> $packages </b> </td> <td> <b> $$balance </b> </td>";
+                echo "<td colspan='7'> <b> Total </b> </td> <td> <b> $packages </b> </td> <td> <b> $$balance </b> </td>";
                 echo "</tr>";
             echo "</table>";
             echo "<a href='../index2.php'> Regresar </a>";

@@ -11,6 +11,6 @@
                 <option value='rep'> Repartidor </option>
                 <option value='admin'> Administrador </option>
                 </select>
-        <input type='number' name='ruta' placeholder='Ruta' min='0' max='4'>
+        <input type='number' name='ruta' placeholder='Ruta' min='0' max='30'>
         <button type='submit' name='update'> Actualizar </button>
 </form>
