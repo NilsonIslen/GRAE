@@ -4,4 +4,5 @@ $reference=$result->referencia;
 $description=$result->descripcion;
 $weight_grams=$result->peso_gramos;
 $price=$result->price;
+$segment=$result->segment;
 ?>

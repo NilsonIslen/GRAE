@@ -5,9 +5,10 @@
         include "arrays/neighborhoods.php";
         include "arrays/time.php";
 
-        $clients_global=0;
-        $clients_global_on_hold=0;
-        $clients_route_on_hold=0;
+        $clients_global=1;
+        $clients_global_on_hold=1;
+        $clients_route=1;
+        $clients_route_on_hold=1;
         if($queryClients -> rowCount() > 0){
         foreach($resultsClients as $result) {
         include "Class/client.php";
@@ -19,17 +20,16 @@
         $clients_global_2=$clients_global++;}
         if($fecha_actual>=$visita_unix){
         $clients_global_on_hold_2=$clients_global_on_hold++;}
+        if($RutaC==$RutaV){
+        $clients_route_2=$clients_route++;}
         if($fecha_actual>=$visita_unix && $RutaC==$RutaV){
         $clients_route_on_hold_2=$clients_route_on_hold++;}
         }}
-        echo "<div>";
         if($profile=="admin"){
-        echo "<p> <b> $clients_global_on_hold_2 clientes en espera de $clients_global_2 </b> </p>";
-        }
-        if($profile=="rep"){
-        echo "<p> <b> $clients_route_on_hold_2 clientes en espera </b> </p>";
-        }
+        echo "<div>";
+        echo "<p> <b> Global: $clients_global_2 clientes, $clients_global_on_hold_2 en espera.</b> </p>";
         echo "</div>";
+        }
             $cola2=0;
             if(isset($_GET['seccion'])){
             $seccion = $_GET['seccion'];
@@ -48,24 +48,22 @@
              $visita_unix=strtotime("$Visita");
                     if($fecha_actual>=$visita_unix
                     && $RutaV==$RutaC 
-                    && $hour==$time2
-                    or ($fecha_actual>=$visita_unix
-                    && $hour==$time2
-                    && $profile=="admin")){
+                    && $hour==$time2){
                         echo "<div>";
-                        echo "<p> <b> Ruta $RutaC </b> </p>";
+                        echo "<p> <b> Ruta$RutaC: $clients_route_2 clientes, $clients_route_on_hold_2 en espera.</b> </p>";
+                        echo "</div>";
+                        echo "<div>";
                         echo "<p> <b> $Barrio </b> </p>";
                         echo "<p class='p_br'>";
                         echo " $NameCli <br />";
                         echo " $Direccion</p>";
-                        echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&seccion=sale'>
+                        echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&prof_cli=$profile_client&seccion=sale'>
                         Registrar venta </a>";
-                        if($IdCli<>4){
                         echo "<a href='tel:$TelCli'> Llamar </a> </p>";
                         if($maps<>''){echo "<a href='$maps'> Maps </a> </p>";}
                         echo "<a href='index2.php?seccion=omit&cola4=$cola3'> Aplazar </a>";
                         echo "<a href='index2.php'> Retomar cola </a>";
-                         echo "</div>";}
+                         echo "</div>";
                     exit();
                    }}
                    }}

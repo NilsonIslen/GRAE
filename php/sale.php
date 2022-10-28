@@ -11,6 +11,7 @@ if(isset($_GET['seccion'])){
 if($seccion == 'sale'){
     $id_cli=$_GET['id_cli'];
     $name_cli=$_GET['name_cli'];
+    $profile_client=$_GET['prof_cli'];
     echo "<form action='../php/sale.php' method='POST'>";
     echo "<h2> $name_cli </h2>";
     echo "<input type='hidden' name='id_cli' value='$id_cli' required>";
@@ -19,13 +20,12 @@ if($seccion == 'sale'){
     if($query_products -> rowCount() > 0){
         foreach($results_products as $result) {
         include "../Class/products.php";
-    if($id_prod<>3
-    && $id_prod<>4
-    && $id_prod<>8
-    && $id_prod<>11
-    ){
+    if($segment==$profile_client){
     echo "<option value=$id_prod> $reference $$price </option>";
-    }}}
+    }
+
+
+}}
     echo "</select>";
     echo "<input type='number' name='amount' placeholder='Cantidad' required>";
     echo "<button type='submit' name='add_product'> + </button>";

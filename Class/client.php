@@ -10,5 +10,6 @@ $email_cli=$result->email;
 $Visita=$result->Visita;
 $hour=$result->hour;
 $frequency=$result->frequency;
+$profile_client=$result->profile;
 $RutaC=$result->Ruta;
 ?>
