@@ -165,11 +165,12 @@ if(isset($_POST['update_products'])){
     $id_product = $_POST['id_product'];
     $weight = $_POST['weight'];
     $price2 = $_POST['price'];
+    $segment2 = $_POST['segment'];
     if($query_products -> rowCount() > 0){
         foreach($results_products as $result) {
         include "../Class/products.php";
                     if($id_product==$id_prod){
-                     $query ="UPDATE products SET peso_gramos=$weight, price=$price2 WHERE id=$id_product";
+                     $query ="UPDATE products SET peso_gramos=$weight, price=$price2 segment=$segment2 WHERE id=$id_product";
                     $result=$connect->query($query);
     
 echo "<div>";
@@ -192,6 +193,7 @@ exit();
             $visit_client = $_POST['visit_client'];
             $hour_visit_client = $_POST['hour_visit_client'];
             $frequency_2 = $_POST['frequency'];
+            $profile_client_2 = $_POST['profile_client'];
             $route_client = $_POST['route_client'];
 
             if($queryClients -> rowCount() > 0){
@@ -208,6 +210,7 @@ exit();
             if($visit_client==''){$visit_client=$Visita;}
             if($hour_visit_client==''){$hour_visit_client=$hour;}
             if($frequency_2==''){$frequency_2=$frequency;}
+            if($profile_client_2==''){$profile_client_2=$profile_client;}
             if($route_client==''){$route_client=$RutaC;}
 
             $query ="UPDATE clients SET
@@ -221,9 +224,10 @@ exit();
             Visita='$visit_client',
             hour='$hour_visit_client',
             frequency='$frequency_2',
+            profile='$profile_client_2',
             Ruta='$route_client'
             WHERE IdCli=$id_client";
-            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,frequency,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:frequency,:Ruta)";
+            $sql="insert into clients(NameCli,document,Barrio,Direccion,maps,TelCli,email,Visita,hour,frequency,profile,Ruta) values(:NameCli,:document,:Barrio,:Direccion,:maps,:TelCli,:email,:Visita,:hour,:frequency,:profile,:Ruta)";
             $result=$connect->query($query);
             echo "<div>";
             echo "<p> Hemos actualizado la informacion del Cliente $NameCli </p>";
@@ -248,6 +252,7 @@ exit();
             <td> Correo electronico </td> 
             <td> Proxima Visita </td> 
             <td> Hora </td> 
+            <td> Perfil </td> 
             <td> Ruta </td>";
             echo "</tr>";
             $cantidad=0;
@@ -268,6 +273,7 @@ exit();
             <td> $email_cli </td>
             <td> $Visita </td>
             <td> $hour </td>
+            <td> $profile_client </td>
             <td> $RutaC </td>
             </tr>";
             }}}

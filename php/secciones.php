@@ -125,6 +125,13 @@ if($seccion == 'update_client'){
     echo "<input type='text' name='hour_visit_client' placeholder='$hour'> <br />";
     echo "<hr> Frecuencia: <br />";
     echo "<input type='number' name='frequency' placeholder='$frequency' min='1' max='30'> <br />";
+    echo "<hr> Perfil: <br />";
+    echo "<select name='profile_client' >";
+    echo "<option value=''> $profile_client </option>";
+    echo "<option value='final'> Cliente final </option>";
+    echo "<option value='stores'> Tiendas </option>";
+    echo "<option value='dealers'> Distribuidores </option>";
+    echo "</select>";
     echo "<hr> Ruta: <br />";
     echo "<input type='number' name='route_client' placeholder='$RutaC'> <br />";
     echo "<hr> <br />";
@@ -138,7 +145,7 @@ if($seccion == 'update_client'){
         echo "<a href='../index2.php'> Regresar </a>";
         echo "<table align='center'>";
         echo "<tr align='center'>";
-        echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> profile </td> <td> Ruta </td>";
+        echo "<td> ID </td> <td> Repartidor </td> <td> Email </td> <td> Telefono </td>  <td> Perfil </td> <td> Ruta </td>";
         echo "</tr>";
     if($queryUsers -> rowCount() > 0){
     foreach($resultsUsers as $result) {
@@ -170,13 +177,13 @@ if($seccion == 'update_client'){
                         echo "<a href='../index2.php'> Regresar </a>";
                         echo "<table align='center'>";
                         echo "<tr align='center'>";
-                        echo "<td> id </td> <td> Referencia </td> <td> Descripcion </td> <td> Peso (gramos) </td>  <td> Precio </td>";
+                        echo "<td> id </td> <td> Referencia </td> <td> Descripcion </td> <td> Peso (gramos) </td>  <td> Precio </td> <td> Mercado </td>";
                         echo "</tr>";
                     if($query_products -> rowCount() > 0){
                     foreach($results_products as $result) {
                     include "../Class/products.php";
                     echo "<tr align='center'>";
-                                echo "<td> <a href='secciones.php?id=$id_prod&seccion=update_products'> $id_prod </a> </td> <td> $reference </td> <td> $description </td> <td> $weight_grams </td> <td> $price </td>";
+                                echo "<td> <a href='secciones.php?id=$id_prod&seccion=update_products'> $id_prod </a> </td> <td> $reference </td> <td> $description </td> <td> $weight_grams </td> <td> $price </td> <td> $segment </td>";
                     echo "</tr>";
                 }}
                     echo "</table>";

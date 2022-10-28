@@ -15,6 +15,12 @@
         ?>
         <input type='number' name='weight' placeholder='Peso'  required>
         <input type='number' name='price' placeholder='Precio' required>
+        <p> Segmento de mercado: </p>
+        <select name='segment' >"; ?>
+        <option value='final'> Cliente final </option>
+        <option value='stores'> Tiendas </option>
+        <option value='dealers'> Distribuidores </option>
+        </select>
         <button type='submit' name='update_products'> Actualizar </button>
         </form>
 </body>
