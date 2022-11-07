@@ -129,8 +129,8 @@ if($seccion == 'update_client'){
     echo "<select name='profile_client' >";
     echo "<option value=''> $profile_client </option>";
     echo "<option value='final'> Cliente final </option>";
-    echo "<option value='stores'> Tiendas </option>";
-    echo "<option value='dealers'> Distribuidores </option>";
+    echo "<option value='store'> Tienda </option>";
+    echo "<option value='distributor'> Distribuidor </option>";
     echo "</select>";
     echo "<hr> Ruta: <br />";
     echo "<input type='number' name='route_client' placeholder='$RutaC'> <br />";

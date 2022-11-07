@@ -18,8 +18,8 @@
         <p> Segmento de mercado: </p>
         <select name='segment' >"; ?>
         <option value='final'> Cliente final </option>
-        <option value='stores'> Tiendas </option>
-        <option value='dealers'> Distribuidores </option>
+        <option value='store'> Tienda </option>
+        <option value='distributor'> Distribuidor </option>
         </select>
         <button type='submit' name='update_products'> Actualizar </button>
         </form>

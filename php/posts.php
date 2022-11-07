@@ -49,8 +49,7 @@ echo "</div>";
                 if($search_by=='client'){$compare=$client_v;}
                 if($search_by=='product'){$compare=$product_v;}
                 if($search_by=='all'){$compare=$id_query;}
-                if($id_query==$compare && $date_v>=$since && $date_v<=$until){
-
+                if($id_query==$compare && $date_v>=$since && $date_v<=$until){        
                     if($query_products -> rowCount() > 0){
                         foreach($results_products as $result) {
                         include "../Class/products.php";
@@ -59,31 +58,31 @@ echo "</div>";
                             $price_2=$price;
                             $amount_v_2=$amount_v;
                         }}}
-
                     if($queryUsers -> rowCount() > 0){
                         foreach($resultsUsers as $result) {
                         include "../Class/user.php";
                         if($seller_v==$id_us){$seller_v_2=$name_us;}
                     }}
-                
+                    $rep=0;
                     if($queryClients -> rowCount() > 0){
                         foreach($resultsClients as $result) {
                         include "../Class/client.php";
                         if($client_v==$IdCli){
                             $client_v_2=$NameCli;
                             $barrio_v_2=$Barrio;
-                        }
-                    }}
-
+                    }}}
                 $worth=$price_2*$amount_v_2;
                 $packages=$amount_v_2+$packages;
                 $balance=$worth+$balance;
                 echo "<tr align='center'>";
                 echo "<td> $id_v </td> <td> $date_v </td> <td> $hora_v </td> <td> $seller_v_2 </td> <td> $client_v_2 </td> <td> $barrio_v_2 </td> <td> $product_v_2 </td> <td> $amount_v </td> <td> $$worth </td>";
-                echo "</tr>";
+                echo "</tr>"; 
                 }}}
                 echo "<tr align='center'>";
-                echo "<td colspan='7'> <b> Total </b> </td> <td> <b> $packages </b> </td> <td> <b> $$balance </b> </td>";
+                echo "<td colspan='9'>
+                    <p> <b> $packages paquetes vendidos </p>
+                    <p> $$balance pesos en ventas </b> </p>
+                    </td>";
                 echo "</tr>";
             echo "</table>";
             echo "<a href='../index2.php'> Regresar </a>";
@@ -129,8 +128,27 @@ echo "</div>";
                             }
                             $folder = "../Temp/$seller/$client";
                             if (file_exists($folder)) {
-                                rmdir($folder);
-                            }  
+                                rmdir($folder);}
+                    
+        
+        $file_ex=file_exists("../Temp/visits/$fecha_2.php");
+        if($file_ex){
+        include "../Temp/visits/$fecha_2.php";
+        }else{
+        $visits=0;
+        $effective_visits=0;
+        }
+        $visits_2=$visits+1;             
+        if($amount>0){$effective_visits_2=$effective_visits+1;
+        }else{$effective_visits_2=$effective_visits;}
+        $fp = fopen("../Temp/visits/$fecha_2.php","w");
+        fputs($fp, "<?php \n");
+        fputs($fp, "$"."visits = $visits_2; \n");
+        fputs($fp, "$"."effective_visits = $effective_visits_2; \n");
+        fputs($fp, "?> \n");
+        fclose($fp);
+
+
                          echo "<div>";
                          echo "<P> Registro de venta exitoso </P>";
                          echo "<a href='../index2.php'> Regresar </a>";
