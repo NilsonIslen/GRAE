@@ -38,10 +38,24 @@ echo "</div>";
                 echo "<a href='../index2.php'> Regresar </a>";
                 echo "<table align='center'>";
                 echo "<tr align='center'>";
-                echo "<td> id venta </td> <td> Fecha </td> <td> Hora </td> <td> Vendedor </td> <td> Cliente </td> <td> Barrio </td> <td> Producto </td> <td> Cantidad </td> <td> Valor </td>";
+                echo "
+                <td> id venta </td>
+                <td> Fecha </td>
+                <td> Hora </td>
+                <td> Vendedor </td>
+                <td> Cliente </td>
+                <td> Barrio </td>
+                <td> Producto </td>
+                <td> Cantidad </td>
+                <td> Valor </td>
+                <td> Total Cantidad </td>
+                <td> Total Valor </td>
+                <td> Visitas </td>
+                <td> Visitas efectivas </td>";
                 echo "</tr>";
                 $packages=0;
                 $balance=0;
+                $visits_count=0;
                 if($query_vent -> rowCount() > 0){
                 foreach($results_vent as $result) {
                 include "../Class/vent.php";
@@ -50,13 +64,18 @@ echo "</div>";
                 if($search_by=='product'){$compare=$product_v;}
                 if($search_by=='all'){$compare=$id_query;}
                 if($id_query==$compare && $date_v>=$since && $date_v<=$until){        
-                    if($query_products -> rowCount() > 0){
-                        foreach($results_products as $result) {
-                        include "../Class/products.php";
-                        if($product_v==$id_prod){
-                            $product_v_2=$reference;
-                            $price_2=$price;
-                            $amount_v_2=$amount_v;
+                if($query_products -> rowCount() > 0){
+                foreach($results_products as $result) {
+                include "../Class/products.php";
+
+                $file=file_exists("../Temp/visits/$date_v.php");
+                if($file){
+                include "../Temp/visits/$date_v.php";}
+
+                if($product_v==$id_prod){
+                    $product_v_2=$reference;
+                    $price_2=$price;
+                    $amount_v_2=$amount_v;
                         }}}
                     if($queryUsers -> rowCount() > 0){
                         foreach($resultsUsers as $result) {
@@ -75,15 +94,23 @@ echo "</div>";
                 $packages=$amount_v_2+$packages;
                 $balance=$worth+$balance;
                 echo "<tr align='center'>";
-                echo "<td> $id_v </td> <td> $date_v </td> <td> $hora_v </td> <td> $seller_v_2 </td> <td> $client_v_2 </td> <td> $barrio_v_2 </td> <td> $product_v_2 </td> <td> $amount_v </td> <td> $$worth </td>";
+                echo "
+                <td> $id_v </td>
+                <td> $date_v </td>
+                <td> $hora_v </td>
+                <td> $seller_v_2 </td>
+                <td> $client_v_2 </td>
+                <td> $barrio_v_2 </td>
+                <td> $product_v_2 </td>
+                <td> $amount_v </td>
+                <td> $$worth </td>
+                <td> $packages </td>
+                <td> $$balance </td>
+                <td> $visits </td>
+                <td> $effective_visits </td>";
                 echo "</tr>"; 
                 }}}
-                echo "<tr align='center'>";
-                echo "<td colspan='9'>
-                    <p> <b> $packages paquetes vendidos </p>
-                    <p> $$balance pesos en ventas </b> </p>
-                    </td>";
-                echo "</tr>";
+
             echo "</table>";
             echo "<a href='../index2.php'> Regresar </a>";
             }
@@ -130,7 +157,6 @@ echo "</div>";
                             if (file_exists($folder)) {
                                 rmdir($folder);}
                     
-        
         $file_ex=file_exists("../Temp/visits/$fecha_2.php");
         if($file_ex){
         include "../Temp/visits/$fecha_2.php";
@@ -147,8 +173,6 @@ echo "</div>";
         fputs($fp, "$"."effective_visits = $effective_visits_2; \n");
         fputs($fp, "?> \n");
         fclose($fp);
-
-
                          echo "<div>";
                          echo "<P> Registro de venta exitoso </P>";
                          echo "<a href='../index2.php'> Regresar </a>";
