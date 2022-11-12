@@ -108,7 +108,7 @@ echo "</div>";
                 }}}
 
             echo "</table>";
-            echo "<p>  $date_v: $effective_visits visitas efectivas de  $visits visitas </p>";
+            echo "<p> <hr> <b> $date_v: $effective_visits visitas efectivas de  $visits visitas </b>  <hr> </p>";
             echo "<a href='../index2.php'> Regresar </a>";
             }
            
