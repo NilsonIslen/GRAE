@@ -103,7 +103,7 @@ echo "</div>";
                 <td> $amount_v </td>
                 <td> $$worth </td>
                 <td> $packages </td>
-                <td> $$balance </td>
+                <td> $$balance </td>";
                 echo "</tr>"; 
                 }}}
 
