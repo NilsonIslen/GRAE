@@ -35,21 +35,26 @@ echo "</div>";
             $id_query=$_POST['id'];
             $since = $_POST['since'];
             $until = $_POST['until'];
-                echo "<a href='../index2.php'> Regresar </a>";
-                echo "<table align='center'>";
+            echo "<a href='../index2.php'> Regresar </a>";
+            echo "<table align='center'>";
+            $file=file_exists("../Temp/visits/$since.php");
+                if($file){
+                include "../Temp/visits/$since.php";
+                echo "<tr> <td colspan='11'> $since: <b> $effective_visits visitas efectivas de  $visits visitas </b> </td> </tr>";
+                }
                 echo "<tr align='center'>";
                 echo "
-                <td> id venta </td>
-                <td> Fecha </td>
-                <td> Hora </td>
-                <td> Vendedor </td>
-                <td> Cliente </td>
-                <td> Barrio </td>
-                <td> Producto </td>
-                <td> Cantidad </td>
-                <td> Valor </td>
-                <td> Total Cantidad </td>
-                <td> Total Valor </td>";
+                <td> <b> id venta </b> </td>
+                <td> <b> Fecha </b> </td>
+                <td> <b> Hora </b> </td>
+                <td> <b> Vendedor </b> </td>
+                <td> <b> Cliente </b> </td>
+                <td> <b> Barrio </b> </td>
+                <td> <b> Producto </b> </td>
+                <td> <b> Cantidad </b> </td>
+                <td> <b> Valor </b> </td>
+                <td> <b> Cantidad total </b> </td>
+                <td> <b> Valor total </b> </td>";
                 echo "</tr>";
                 $packages=0;
                 $balance=0;
@@ -65,11 +70,7 @@ echo "</div>";
                 if($query_products -> rowCount() > 0){
                 foreach($results_products as $result) {
                 include "../Class/products.php";
-
-                $file=file_exists("../Temp/visits/$date_v.php");
-                if($file){
-                include "../Temp/visits/$date_v.php";}
-
+                  
                 if($product_v==$id_prod){
                     $product_v_2=$reference;
                     $price_2=$price;
@@ -104,11 +105,14 @@ echo "</div>";
                 <td> $$worth </td>
                 <td> $packages </td>
                 <td> $$balance </td>";
-                echo "</tr>"; 
+                echo "</tr>";
                 }}}
-
-            echo "</table>";
-            echo "<p> <hr> <b> $date_v: $effective_visits visitas efectivas de  $visits visitas </b>  <hr> </p>";
+            $file=file_exists("../Temp/visits/$until.php");
+                if($file){
+                include "../Temp/visits/$until.php";
+                echo "<tr> <td colspan='11'> $until: <b> $effective_visits visitas efectivas de  $visits visitas </b> <tr> </p>";
+            }
+          echo "</table>";
             echo "<a href='../index2.php'> Regresar </a>";
             }
            
@@ -123,7 +127,7 @@ echo "</div>";
                 $file=file_exists("../Temp/$seller/$client/$seq.php");
                 if($file){require "../Temp/$seller/$client/$seq.php";
                 }else{continue;}
-                if($amount>=1){
+                if($amount>=0){
                     $sql="insert into ventas2022(date,hour,seller,client,product,amount) values(:date,:hour,:seller,:client,:product,:amount)";
                     $sql=$connect->prepare($sql);
                     $sql->bindParam(':date',$fecha_2,PDO::PARAM_STR, 25);
