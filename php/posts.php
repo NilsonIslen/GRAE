@@ -49,9 +49,7 @@ echo "</div>";
                 <td> Cantidad </td>
                 <td> Valor </td>
                 <td> Total Cantidad </td>
-                <td> Total Valor </td>
-                <td> Visitas </td>
-                <td> Visitas efectivas </td>";
+                <td> Total Valor </td>";
                 echo "</tr>";
                 $packages=0;
                 $balance=0;
@@ -106,12 +104,11 @@ echo "</div>";
                 <td> $$worth </td>
                 <td> $packages </td>
                 <td> $$balance </td>
-                <td> $visits </td>
-                <td> $effective_visits </td>";
                 echo "</tr>"; 
                 }}}
 
             echo "</table>";
+            echo "<p>  $date_v: $effective_visits visitas efectivas de  $visits visitas </p>";
             echo "<a href='../index2.php'> Regresar </a>";
             }
            
