@@ -40,7 +40,10 @@ echo "</div>";
             $file=file_exists("../Temp/visits/$since.php");
                 if($file){
                 include "../Temp/visits/$since.php";
-                echo "<tr> <td colspan='11'> $since: <b> $effective_visits visitas efectivas de  $visits visitas </b> </td> </tr>";
+                $effectiveness=($effective_visits*100)/$visits;
+                echo "<tr> <td colspan='11'>
+            $since: <b> $effective_visits visitas efectivas de  $visits ($effectiveness %) </b>
+            </td> </tr>";
                 }
                 echo "<tr align='center'>";
                 echo "
@@ -110,7 +113,10 @@ echo "</div>";
             $file=file_exists("../Temp/visits/$until.php");
                 if($file){
                 include "../Temp/visits/$until.php";
-                echo "<tr> <td colspan='11'> $until: <b> $effective_visits visitas efectivas de  $visits visitas </b> <tr> </p>";
+                $effectiveness=($effective_visits*100)/$visits;
+                echo "<tr> <td colspan='11'>
+$until: <b> $effective_visits visitas efectivas de  $visits ($effectiveness %)
+</b> </td> </tr>";
             }
           echo "</table>";
             echo "<a href='../index2.php'> Regresar </a>";
