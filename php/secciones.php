@@ -128,6 +128,7 @@ if($seccion == 'update_client'){
     echo "<hr> Perfil: <br />";
     echo "<select name='profile_client' >";
     echo "<option value=''> $profile_client </option>";
+    echo "<option value='inactive'> Inactivo </option>";
     echo "<option value='final'> Cliente final </option>";
     echo "<option value='store'> Tienda </option>";
     echo "<option value='distributor'> Distribuidor </option>";
@@ -234,6 +235,6 @@ if($seccion == 'update_client'){
 
 }
 echo "<div>";
-echo "<a href='../index2.php'> Continuar </a>";
+echo "<a href='../index2.php'> Regresar </a>";
 echo "</div>";
 ?>

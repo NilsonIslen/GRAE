@@ -16,13 +16,13 @@
         $fecha_actual=strtotime("$Fecha");
         $visita_unix=strtotime("$Visita");
 
-        if($IdCli<>''){
+        if($IdCli<>'' && $profile_client<>'inactive'){
         $clients_global_2=$clients_global++;}
-        if($fecha_actual>=$visita_unix){
+        if($fecha_actual>=$visita_unix && $profile_client<>'inactive'){
         $clients_global_on_hold_2=$clients_global_on_hold++;}
-        if($RutaC==$RutaV){
+        if($RutaC==$RutaV && $profile_client<>'inactive'){
         $clients_route_2=$clients_route++;}
-        if($fecha_actual>=$visita_unix && $RutaC==$RutaV){
+        if($fecha_actual>=$visita_unix && $RutaC==$RutaV && $profile_client<>'inactive'){
         $clients_route_on_hold_2=$clients_route_on_hold++;}
         }}
         if($profile=="admin"){
@@ -31,12 +31,6 @@
         echo "</div>";
         }
             $cola2=0;
-            if(isset($_GET['seccion'])){
-            $seccion = $_GET['seccion'];
-            $cola4 = $_GET['cola4'];
-            if($seccion=='omit'){
-            $cola5 = $cola4+1;
-            $cola2=$cola5;}}
             while($cola2 <= 1380){
             $cola3 = $cola2++; 
             $time2=$time[$cola3];
@@ -48,7 +42,8 @@
              $visita_unix=strtotime("$Visita");
                     if($fecha_actual>=$visita_unix
                     && $RutaV==$RutaC 
-                    && $hour==$time2){
+                    && $hour==$time2
+                    && $profile_client<>'inactive'){
                         echo "<div>";
                         echo "<p> <b> Ruta$RutaC: $clients_route_2 clientes, $clients_route_on_hold_2 en espera.</b> </p>";
                         echo "</div>";
@@ -57,12 +52,13 @@
                         echo "<p class='p_br'>";
                         echo " $NameCli <br />";
                         echo " $Direccion</p>";
+                        echo "<p> <hr> </p>";
+                        echo "<a href='tel:$TelCli'> Llamar </a> </p>";
+                        echo "<p> <hr> </p>";
+                        if($maps<>''){echo "<a href='$maps'> Maps </a> </p>";}
+                        echo "<p> <hr> </p>";
                         echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&prof_cli=$profile_client&seccion=sale'>
                         Registrar venta </a>";
-                        echo "<a href='tel:$TelCli'> Llamar </a> </p>";
-                        if($maps<>''){echo "<a href='$maps'> Maps </a> </p>";}
-                        echo "<a href='index2.php?seccion=omit&cola4=$cola3'> Aplazar </a>";
-                        echo "<a href='index2.php'> Retomar cola </a>";
                          echo "</div>";
                     exit();
                    }}

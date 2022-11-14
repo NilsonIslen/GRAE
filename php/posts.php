@@ -41,7 +41,7 @@ echo "</div>";
                 if($file){
                 include "../Temp/visits/$since.php";
                 $effectiveness=($effective_visits*100)/$visits;
-                echo "<tr> <td colspan='11'>
+                echo "<tr> <td colspan='12'>
             $since: <b> $effective_visits visitas efectivas de  $visits ($effectiveness %) </b>
             </td> </tr>";
                 }
@@ -53,6 +53,7 @@ echo "</div>";
                 <td> <b> Vendedor </b> </td>
                 <td> <b> Cliente </b> </td>
                 <td> <b> Barrio </b> </td>
+                <td> <b> Telefono </b> </td>
                 <td> <b> Producto </b> </td>
                 <td> <b> Cantidad </b> </td>
                 <td> <b> Valor </b> </td>
@@ -91,6 +92,7 @@ echo "</div>";
                         if($client_v==$IdCli){
                             $client_v_2=$NameCli;
                             $barrio_v_2=$Barrio;
+                            $telephone=$TelCli;
                     }}}
                 $worth=$price_2*$amount_v_2;
                 $packages=$amount_v_2+$packages;
@@ -103,6 +105,7 @@ echo "</div>";
                 <td> $seller_v_2 </td>
                 <td> $client_v_2 </td>
                 <td> $barrio_v_2 </td>
+                <td> $telephone </td>
                 <td> $product_v_2 </td>
                 <td> $amount_v </td>
                 <td> $$worth </td>
@@ -114,7 +117,7 @@ echo "</div>";
                 if($file){
                 include "../Temp/visits/$until.php";
                 $effectiveness=($effective_visits*100)/$visits;
-                echo "<tr> <td colspan='11'>
+                echo "<tr> <td colspan='12'>
 $until: <b> $effective_visits visitas efectivas de  $visits ($effectiveness %)
 </b> </td> </tr>";
             }
@@ -151,7 +154,7 @@ $until: <b> $effective_visits visitas efectivas de  $visits ($effectiveness %)
                         if($IdCli==$client){
                         $date2=$Visit[$frequency];
                         $neighborhood=$Barrio;
-                            $query ="UPDATE clients SET Visita='$date2',hour='$hour2' WHERE IdCli=$client";
+                            $query ="UPDATE clients SET Visita='$date2',hour='$hour' WHERE IdCli=$client";
                             $result=$connect->query($query);                            
                         }      
                             }}
@@ -288,10 +291,12 @@ exit();
 
             if(isset($_POST['listar_clientes'])){
             $ruta=$_POST['ruta'];
+            include "../arrays/time.php";
             echo "<a href='../index2.php'> Regresar </a>";
             echo "<table align='center'>";
             echo "<tr align='center'>";
             echo "<td > ID </td>
+            <td> Hora </td> 
             <td> Cliente </td> 
             <td> Cedula o Nit </td> 
             <td> Barrio </td> 
@@ -300,19 +305,23 @@ exit();
             <td> Telefono </td> 
             <td> Correo electronico </td> 
             <td> Proxima Visita </td> 
-            <td> Hora </td> 
             <td> Perfil </td> 
             <td> Ruta </td>";
             echo "</tr>";
+            $cola2=0;
+            while($cola2 <= 1380){
+            $cola3 = $cola2++; 
+            $time2=$time[$cola3];
             $cantidad=0;
             if($queryClients -> rowCount() > 0){
             foreach($resultsClients as $result) {
             include "../Class/client.php";
-            if($RutaC==$ruta){
-            $cantid=$cantidad++;
+            if($RutaC==$ruta){$cantid=$cantidad++;}
+            if($RutaC==$ruta && $hour==$time2){
             echo "<tr align='center'>";
             echo "
             <td> <a href='secciones.php?id_client=$IdCli&seccion=update_client'> $IdCli </a> </td> 
+            <td> $hour </td>
             <td> $NameCli </td>
             <td> $document_cli </td>
             <td> $Barrio </td>            
@@ -321,11 +330,10 @@ exit();
             <td> $TelCli </td>
             <td> $email_cli </td>
             <td> $Visita </td>
-            <td> $hour </td>
             <td> $profile_client </td>
             <td> $RutaC </td>
             </tr>";
-            }}}
+            }}}}
             echo "</table>"; 
             echo "<div> <p> <b> $cantid clientes</b> </p> </div>"; 
             echo '<a href="../index2.php"> Regresar </a>';
