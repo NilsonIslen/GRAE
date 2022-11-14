@@ -171,6 +171,7 @@ $until: <b> $effective_visits visitas efectivas de  $visits ($effectiveness %)
         if($file_ex){
         include "../Temp/visits/$fecha_2.php";
         }else{
+        $fecha_2=date('Y-m-d');
         $visits=0;
         $effective_visits=0;
         }
