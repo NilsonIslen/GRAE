@@ -50,6 +50,9 @@
                         echo "<div>";
                         echo "<p> <b> $Barrio </b> </p>";
                         echo "<p class='p_br'>";
+                        if($profile=="admin"){
+                        echo "<a href='php/secciones.php?id_client=$IdCli&seccion=update_client'> $IdCli - $hour</a>";
+                        }
                         echo " $NameCli <br />";
                         echo " $Direccion</p>";
                         echo "<p> <hr> </p>";

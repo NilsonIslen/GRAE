@@ -25,12 +25,7 @@ echo "<input type='hidden' name='NumAl' Value='$Al'>";
                  <input type='text' name='Telefono' placeholder='Telefono'required>
                  <input type='email' name='email' placeholder='Correo electronico'>
                  <input type='number' name='frequency' placeholder='Frecuencia de visita' min='1' max='30' required>
-                 <select id='Sel0' name='Ruta'>"; ?>
-                 <option value=1> Ruta 1 </option>
-                 <option value=2> Ruta 2 </option>
-                 <option value=3> Ruta 3 </option>
-                 <option value=4> Ruta 4 </option>
-                 </select>
+                 <input type='number' name='Ruta' placeholder='Ruta' min='1' max='50' required>
                  <?php echo "<select id='Sel$NumColor' name='Color'>"; ?>
                  <option value=0> De que color es esta casilla? </option>
                  <option value=1> Amarillo </option>
