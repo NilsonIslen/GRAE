@@ -60,7 +60,7 @@
                         echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&prof_cli=$profile_client&seccion=sale'>
                         Registrar venta </a>";
                          echo "</div>";
-                    exit();
+            if($profile=="rep"){exit();}
                    }}
                    }}
                   
