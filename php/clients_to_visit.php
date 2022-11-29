@@ -45,7 +45,7 @@
                     && $hour==$time2
                     && $profile_client<>'inactive'){
                         echo "<div>";
-                        echo "<p> <b> Ruta$RutaC: $clients_route_2 clientes, $clients_route_on_hold_2 en espera.</b> </p>";
+                        echo "<p> <b> Ruta $RutaC: $clients_route_2 clientes, $clients_route_on_hold_2 en espera.</b> </p>";
                         echo "</div>";
                         echo "<div>";
                         echo "<p> <b> $Barrio </b> </p>";
@@ -63,7 +63,6 @@
                         echo "<a href='php/sale.php?id_cli=$IdCli&name_cli=$NameCli&prof_cli=$profile_client&seccion=sale'>
                         Registrar venta </a>";
                          echo "</div>";
-            if($profile=="rep"){exit();}
                    }}
                    }}
                   
